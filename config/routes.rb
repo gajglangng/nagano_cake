@@ -12,8 +12,9 @@ Rails.application.routes.draw do
       post '/sign_in' => 'sessions#create'
       delete '/sign_out' => 'sessions#destroy'
     end  
+    get '' => 'homes#top'
     resources :items
-    resources :genres
+    resources :genres, only: [:create, :index, :edit, :update]
     resources :customers
     resources :orders
     resources :order_details
