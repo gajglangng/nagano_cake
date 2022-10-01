@@ -32,7 +32,8 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
   }
   root to: 'public/homes#top'
-  get 'public/home/about' => 'homes#about', as: 'about'
+  get 'homes/about' => 'homes#about', as: '/about'
+  get '/customers/my_page' => 'customers#show'
   
   namespace :public do
     resources :items
