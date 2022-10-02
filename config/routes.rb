@@ -32,12 +32,12 @@ Rails.application.routes.draw do
   sessions: 'public/sessions'
   }
   root to: 'public/homes#top'
-  get 'homes/about' => 'homes#about', as: '/about'
-  get '/customers/my_page' => 'customers#show'
   
-  namespace :public do
+  scope module: :public do
+    get 'home/about' => 'homes#about', as: '/about'
+    resources :customers, only: [:edit]
+    get '/customers/my_page' => 'customers#show'
     resources :items
-    resources :customers
     resources :cart_items
     resources :orders
     resources :addresses
