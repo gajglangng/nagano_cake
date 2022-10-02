@@ -8,6 +8,10 @@ class Public::CustomersController < ApplicationController
   def edit
     @customer = Customer.find(params[:id])
   end
+  
+  def unsubscribe
+      @customer = current_customer
+  end
 
   def update
     @customer = Customer.find(params[:id])

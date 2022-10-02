@@ -35,8 +35,9 @@ Rails.application.routes.draw do
   
   scope module: :public do
     get 'home/about' => 'homes#about', as: '/about'
-    resources :customers, only: [:edit]
+    resources :customers, only: [:edit, :update]
     get '/customers/my_page' => 'customers#show'
+    get '/customers/unsubscribe' => 'customers#unsubscribe'
     resources :items
     resources :cart_items
     resources :orders
