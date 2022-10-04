@@ -6,25 +6,13 @@ class Public::OrdersController < ApplicationController
         @orders = current_customer.orders.new
     end
 
-    def confirm #注文情報確認
-        @customer = current_customer
-        @cart_items = CartItem.where(customer_id: current_customer.id)
-        @shipping_fee = 800
-        @total_price = 0
-        @cart_items.each do |cart_item|
-          @total_price += cart_item.subtotal
-        end
-        
-        @billing_amount = @shipping_fee + @total_price
-        @order = current_customer.orders.new(order_params)
-        case params[:delivery_address_type]
-        when "ご自身の住所"
-             
-        when "登録済住所から選択"
-             
-        when "新しいお届け先"
-            
-        end
+   def confirm
+        @order = Order.new(order_params)
+        binding.pry #追記する
+        @address = Address.find(params[:order][:address_id])
+        @order.postal_code = @address.postal_code
+        @order.address = @address.address
+        @order.name = @address.name
     end
 
     def create #注文情報登録
@@ -35,7 +23,6 @@ class Public::OrdersController < ApplicationController
         @order.address = params[:order][:address]
         @order.payment_method = params[:order][:payment_method]
         @order.billing_amount = params[:order][:billing_amount]
-        @order.shipping_fee = 800
         @order.save
           current_customer.cart_items.each do |cart_item|
             @order_item = @order.order_items.new
@@ -66,8 +53,7 @@ class Public::OrdersController < ApplicationController
 
 
     private
-
     def order_params
-        params.permit(:payment_method, :address, :postcode, :name, :billing_amount)
+        params.require(:order).permit(:payment_method, :postal_code, :address, :name)
     end
 end
