@@ -6,5 +6,8 @@ class Public::ItemsController < ApplicationController
     @pages = @items.all.page(params[:page])
   end
 
-  
+  def show
+    @customer = current_customer
+    @item = Item.find(params[:id])
+  end
 end

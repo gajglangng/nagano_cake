@@ -15,7 +15,7 @@ class Public::CartItemsController < ApplicationController
   def create
     @item_count = params[:item_count] ? params[:item_count] : params[:cart_item][:item_count]
     @cart_item = CartItem.new({customer_id:params[:customer_id], item_id:params[:item_id], item_count:@item_count})
-    # binding.pry
+    binding.pry
     if (CartItem.where(item_id: params[:item_id]).where(customer_id: current_customer.id).exists?) && (@item_count.present?)
       @cart_item = CartItem.find_by(item_id: params[:item_id],customer_id: current_customer.id)
       @cart_item.item_count += @item_count.to_i
@@ -51,10 +51,9 @@ class Public::CartItemsController < ApplicationController
   end
 
 
-  private
-
+private
   def cart_item_params
-    params.permit(:customer_id, :item_id, :item_count)
+      params.require(:cart_item).permit(:item_id, :amount)
   end
 
   def cart_item_count_params
