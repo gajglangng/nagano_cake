@@ -6,7 +6,7 @@ class Public::OrdersController < ApplicationController
         @orders = current_customer.orders.new
     end
 
-   def confirm
+    def confirm
         @order = Order.new(order_params)
         binding.pry #追記する
         @address = Address.find(params[:order][:address_id])
@@ -36,7 +36,7 @@ class Public::OrdersController < ApplicationController
         redirect_to orders_complete_path
     end
 
-    def order_complete #注文完了
+    def complete #注文完了
         @customer = current_customer
     end
 
