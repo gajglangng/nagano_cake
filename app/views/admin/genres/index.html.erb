@@ -2,7 +2,7 @@
   <div class="row">
     
     <div class="col-sm-5 genre-add-box">
-      <h3><span class="genre-title-index">　ジャンル一覧・追加　</span></h3>
+      <h3><span class="genre-title-index">ジャンル一覧・追加</span></h3>
       <br></br>
       <div class="add_genre">
       <!--ジャンル登録-->
@@ -17,14 +17,9 @@
             </div>
           <% end %>
           <div class = "genre-add">
-            <%= "ジャンル" %>　
+            <%= "ジャンル名" %>　
             <%= form.text_field :name %>　
-            <!--ラジオボタン-->
-            <%= form.radio_button :is_valid, :true, checked: true %>
-            <%= form.label :is_vaild, "有効", value: :true %>
-            <%= form.radio_button :is_valid, :false %>
-            <%= form.label :is_vaild, "無効", value: :false %>　
-            <%= form.submit " 追加 ", class: "btn btn-info" %>
+            <%= form.submit " 新規登録 ", class: "btn btn-info" %>
           </div>
         <% end %>
 
@@ -43,8 +38,6 @@
         <thead>
           <tr class="active">
             <th>ジャンル</th>
-            <th>状態</th>
-            <th><!--編集する--></th>
           </tr>
         </thead>
 
@@ -52,13 +45,6 @@
           <% @genres.each do |genre| %>
             <tr>
               <td><%= genre.name %></td>
-              <td>
-                <% if genre.is_valid == true %>
-                  <p>有効</p>
-                <% else %>
-                  <p>無効</p>
-                <% end %>
-              </td>
               <td class="edit-btn"><%= link_to '編集する', edit_admin_genre_path(genre.id), class: "btn btn-primary" %></td>
             </tr>
           <% end %>

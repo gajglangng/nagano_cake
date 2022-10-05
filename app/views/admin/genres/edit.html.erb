@@ -2,7 +2,7 @@
   <div class="row">
     
     <div class="col-lg-6 genre-edit-box">
-      <h3><span class="genre-edit-title">　ジャンル編集　</span></h3>
+      <h3><span class="genre-edit-title">ジャンル編集</span></h3>
       <br></br>
       <div class="edit_genre">
       <!--ジャンル編集-->
@@ -17,13 +17,9 @@
             </div>
           <% end %>
           <div>
-            <%= "ジャンル" %>　
+            <%= "ジャンル名" %>　
             <%= form.text_field :name %>
-            <%= form.radio_button :is_valid, :true %>
-            <%= form.label :is_vaild, "有効", value: :true %>
-            <%= form.radio_button :is_valid, :false %>
-            <%= form.label :is_vaild, "無効", value: :false %>　
-            <%= form.submit " 変更を保存する ", class: "btn btn-info" %>
+            <%= form.submit "変更を保存", class: "btn btn-info" %>
           </div>
         <% end %>
         </div>
