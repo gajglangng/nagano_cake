@@ -7,7 +7,26 @@ class Public::AddressesController < ApplicationController
     @addresses = @customer.shipping_addresses
   end
 
+  def create
+    @address = Address.new(address_params)
+    @address.customer_id = current_customer.id
+    if @address.save
+      redirect_to addresses_path
+    else
+      @customer = Customer.find(current_customer.id)
+      @addresses = @customer.addresses
+      render 'index'
+    end
+  end
+
   
+
+
+  def destroy
+    @address = Address.find(params[:id])
+    @address.destroy
+    redirect_to addresses_path
+  end
 
 
 private
