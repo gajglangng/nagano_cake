@@ -16,9 +16,8 @@ class Item < ApplicationRecord
                                   }
 
   validates :is_sale, inclusion: {in: [true, false]}
-
   has_many :cart_items, dependent: :destroy
 
-  attachment :image
+  #attachment :image
   
 end

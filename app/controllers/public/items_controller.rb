@@ -3,7 +3,7 @@ class Public::ItemsController < ApplicationController
     @customer = current_customer
         
     #ページネーション
-    @items = Items.all.page(params[:page])
+    @pages = Item.page(params[:page])
   end
 
   def show
