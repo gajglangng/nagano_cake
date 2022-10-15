@@ -15,6 +15,7 @@
     </div>
     <br></br><br></br>
     <h2 class="new_item">新着商品</h2>
+    
     <!--新着商品一覧・表示-->
     <div class="item-box">
       <% @new_items.each do |item| %>
@@ -28,7 +29,7 @@
       <% end %>
       <div>
         </br></br>
-      <p id="item-index-link"><%= link_to " 全ての商品を見る> ", items_path %></p>
+      <p id="item-index-link"><%= link_to "全ての商品を見る", items_path %></p>
       </div>
     </div>
   </div>

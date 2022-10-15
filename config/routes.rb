@@ -31,20 +31,20 @@ Rails.application.routes.draw do
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :customers,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
+   registrations: "public/registrations",
+    sessions: 'public/sessions'
   }
-  root to: 'public/homes#top'
   
   scope module: :public do
-    get 'home/about' => 'homes#about', as: '/about'
+    root to: 'public/homes#top'
+    get "homes/about" => "public/homes#about", as: "about"
     resources :customers, only: [:edit, :update]
     get '/customers/my_page' => 'customers#show'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
-    resources :items
-    resources :cart_items
-    resources :orders
-    resources :addresses
+    resources :items, only: [:index, :show]
+    resources :cart_items, only: [:create, :destroy, :update]
+    resources :orders, only: [:new, :create, :show, :index]
+    resources :addresses, only: [:index, :create, :destroy, :edit, :update]
   end
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
