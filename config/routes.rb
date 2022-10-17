@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   # URL /customers/sign_in ...
   devise_for :customers,skip: [:passwords], controllers: {
    registrations: "public/registrations",
-    sessions: 'public/sessions'
+   sessions: 'public/sessions'
   }
   
   scope module: :public do
@@ -44,6 +44,8 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:create, :destroy, :update]
     resources :orders, only: [:new, :create, :show, :index]
+    post '/orders/confirm' => 'orders#confirm'
+    get '/orders/complete' => 'orders#order_complete'
     resources :addresses, only: [:index, :create, :destroy, :edit, :update]
   end
   
