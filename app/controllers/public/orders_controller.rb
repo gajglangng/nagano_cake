@@ -20,17 +20,17 @@ class Public::OrdersController < ApplicationController
         @order = Order.new(order_params)
         @order.customer_id = current_customer.id
         @order.name = params[:order][:name]
-        @order.postcode = params[:order][:postcode]
+        @order.postal_code = params[:order][:postal_code]
         @order.address = params[:order][:address]
         @order.payment_method = params[:order][:payment_method]
-        @order.billing_amount = params[:order][:billing_amount]
+        @order.total_payment = params[:order][:billing_amount]
         @order.save
           current_customer.cart_items.each do |cart_item|
             @order_item = @order.order_items.new
             @order_item.order_id = @order.id
             @order_item.item_id = cart_item.item_id
-            @order_item.item_count = cart_item.item_count
-            @order_item.price_including_tax = (cart_item.item.price * 1.1).round(2).ceil
+            @order_item.amount= cart_item.amount
+            @order_item.price = (cart_item.item.price * 1.1).round(2).ceil
             @order_item.save
           end
         current_customer.cart_items.destroy_all
@@ -49,7 +49,7 @@ class Public::OrdersController < ApplicationController
     def show #注文履歴詳細
         @customer = current_customer
         @order = Order.find(params[:id])
-        @order_items = OrderItem.where(order_id: params[:id])
+        @order_items = OrderDetail.where(order_id: params[:id])
     end
 
 

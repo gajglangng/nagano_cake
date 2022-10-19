@@ -4,7 +4,7 @@ class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
     @customer = Customer.find(current_customer.id)
-    @addresses = @customer.shipping_addresses
+    @addresses = @customer.addresses
   end
 
   def create

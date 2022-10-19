@@ -5,20 +5,20 @@ class Public::CartItemsController < ApplicationController
   def cart
     @customer = current_customer
     @cart_items = CartItem.where(customer_id: current_customer.id)
-    @total_price = 0
+    @price = 0
     @cart_items.each do |cart_item|
       
-      @total_price += cart_item.subtotal
+      @price += cart_item.subtotal
     end
   end
 
   def create
-    @item_count = params[:item_count] ? params[:item_count] : params[:cart_item][:item_count]
-    @cart_item = CartItem.new({customer_id:params[:customer_id], item_id:params[:item_id], item_count:@item_count})
+    @amount = params[:amount] ? params[:item_count] : params[:cart_item][:amount]
+    @cart_item = CartItem.new({customer_id:params[:customer_id], item_id:params[:item_id], item_count:@amount})
     binding.pry
-    if (CartItem.where(item_id: params[:item_id]).where(customer_id: current_customer.id).exists?) && (@item_count.present?)
+    if (CartItem.where(item_id: params[:item_id]).where(customer_id: current_customer.id).exists?) && (@amount.present?)
       @cart_item = CartItem.find_by(item_id: params[:item_id],customer_id: current_customer.id)
-      @cart_item.item_count += @item_count.to_i
+      @cart_item.item_count += @amount.to_i
       @cart_item.save
       redirect_to action: :cart
     elsif @cart_item.save
