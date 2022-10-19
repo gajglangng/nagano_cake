@@ -28,10 +28,11 @@ Rails.application.routes.draw do
    registrations: "public/registrations",
    sessions: 'public/sessions'
   }
+  root to: 'homes#top'
+  get 'homes/about' => 'homes#about', as: 'about'
   
   scope module: :public do
-    root to: 'public/homes#top'
-    get '/homes/about' => 'homes#about'
+    
     resources :customers, only: [:edit, :update]
     get '/customers/my_page' => 'customers#show'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
