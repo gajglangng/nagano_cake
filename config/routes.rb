@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   
   scope module: :public do
     root to: 'public/homes#top'
-    get "homes/about" => "public/homes#about", as: "about"
+    get '/homes/about' => 'homes#about'
     resources :customers, only: [:edit, :update]
     get '/customers/my_page' => 'customers#show'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
