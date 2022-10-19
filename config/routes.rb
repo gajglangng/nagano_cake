@@ -28,8 +28,8 @@ Rails.application.routes.draw do
    registrations: "public/registrations",
    sessions: 'public/sessions'
   }
-  root to: 'homes#top'
-  get 'homes/about' => 'homes#about', as: 'about'
+  root to: 'public/homes#top'
+  get 'about' => 'public/homes#about'
   
   scope module: :public do
     
