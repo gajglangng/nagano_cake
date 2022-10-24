@@ -11,7 +11,8 @@ module NaganoCake
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     
-    config.i18n.default_locale = :ja
+    #以下で日本語化の設定をする
+    config.i18n.default_locale = :ja 
     config.autoload_paths += Dir.glob("#{config.root}/app/application/public")
    
     # Configuration for the application, engines, and railties goes here.

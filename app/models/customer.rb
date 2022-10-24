@@ -17,13 +17,13 @@ class Customer < ApplicationRecord
 
   validates :email, presence: true
 
-  validates :postcode, presence: true,
+  validates :postal_code, presence: true,
                        format: {
                          with: /\A\d{7}\z/,
                          message: "を7桁の数値で入力して下さい。"
                        }
   validates :address, presence: true
-  validates :phone_number, presence: true,
+  validates :telephone_number, presence: true,
                            format: {
                              with:   /\A\d{10,11}\z/,
                              message: "を10桁もしくは11桁の数値で入力して下さい。"
@@ -35,14 +35,14 @@ class Customer < ApplicationRecord
          
   has_many :cart_items
   has_many :orders
-  has_many :shipping_addresses
+  
 
   def active_for_authentication?
     super && (self.is_quit == false)
   end
 
   def now_address
-     self.postcode + self.address + self.last_name + self.first_name
+     self.postal_code + self.address + self.last_name + self.first_name
   end       
          
 end
