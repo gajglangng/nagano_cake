@@ -11,6 +11,10 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="fix-wrapper">
+      <%= render 'layouts/header' %>
+      <main><%= yield %></main>
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>

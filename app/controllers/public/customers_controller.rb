@@ -1,5 +1,5 @@
 class Public::CustomersController < ApplicationController
-  before_action :correct_user, only: [:edit, :update]
+  before_action :authenticate_customer!
 
   def show
     @customer = Customer.find(params[:id])
@@ -10,7 +10,7 @@ class Public::CustomersController < ApplicationController
   end
   
   def unsubscribe
-      @customer = current_customer
+    @customer = current_customer
   end
 
   def update
