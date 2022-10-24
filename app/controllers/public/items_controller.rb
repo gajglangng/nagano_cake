@@ -1,7 +1,7 @@
 class Public::ItemsController < ApplicationController
   def index
     @customer = current_customer
-        
+    @items = Item.all    
     #ページネーション
     @pages = Item.page(params[:page])
   end
