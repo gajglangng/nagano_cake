@@ -13,11 +13,11 @@ Rails.application.routes.draw do
       delete '/sign_out' => 'sessions#destroy'
     end  
     get '' => 'homes#top'
-    resources :items
+    resources :items, except: [:destroy]
     resources :genres, only: [:create, :index, :edit, :update]
-    resources :customers
-    resources :orders
-    resources :order_details
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :orders, only: [:index, :show, :update]
+    resources :order_details, only: [:update]
   end
   
   
@@ -36,8 +36,11 @@ Rails.application.routes.draw do
     resources :customers, only: [:edit, :update, :show]
     get '/customers/my_page' => 'customers#show'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
+    patch '/customers/withdraw' => 'customers#withdraw'
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:create, :destroy, :update]
+    delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
+    get '/cart_items' => 'cart_items#cart'
     resources :orders, only: [:new, :create, :show, :index]
     post '/orders/confirm' => 'orders#confirm'
     get '/orders/complete' => 'orders#order_complete'
