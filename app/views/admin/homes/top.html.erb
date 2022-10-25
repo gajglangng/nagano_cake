@@ -19,7 +19,7 @@
               <td><%= order.customer.last_name %> <%= order.customer.first_name %></td>
               <% count = 0 %>
               <% order.order_items.each do |order_item| %>
-                <%count += order_item.item_count %>
+                <%count += order_item.amount %>
               <% end %>
               <td><%= count %></td>
             </tr>
