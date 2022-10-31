@@ -14,12 +14,12 @@
 
       <h3 class="edit-title-admin">商品編集</h3>
       <div class="col-lg-5">
-        <% if @item.image.present? %>
-          <%= attachment_image_tag @item, :image, id: :img_prev, size: "450x300" %>
+        <% if @item.image.attached? %>
+          <%= image_tag @item.image, size: "450x300", format: 'jpeg' %>
         <% else %>
-          <%= image_tag @item, :image, :fill, 450, 300, format: 'jpeg', id: :img_prev %>
+          <%= image_tag 'no_image', size: "450x300" %>
         <% end %>
-        <%= f.attachment_field :image, id: :item_img %>
+      
         
          <script type="text/javascript">
           $(function() {
@@ -47,7 +47,7 @@
           </tr>
           <tr>
             <td><%= f.label :商品説明 %></td>
-            <td><%= f.text_field :description %></td>
+            <td><%= f.text_field :introduction %></td>
           </tr>
           <tr>
             <td><%= f.label :ジャンル %></td>
@@ -59,7 +59,7 @@
           </tr>
           <tr>
             <td><%= f.label :販売ステータス %>
-            <td><%= f.select :is_sale, [["販売中", "1"],["販売停止中", "0"]] %></td><br>
+            <td><%= f.select :is_active, [["販売中", "1"],["販売停止中", "0"]] %></td><br>
           </tr>
         </table>
       <div id = "item-action-btn">

@@ -4,31 +4,7 @@
     <div class="row new-item-box">
 
       <h3 class="new-title">商品新規登録</h3>
-      <div class="col-lg-5 image-position">
-        <% if @item.image.present? %>
-          <%= image_tag :image, id: :img_prev, size: "450x300" %>
-        <% else %>
-          <%= image_tag "no_image.jpg", id: :img_prev, size: "450x300" %>
-        <% end %>
-        <%= f.attachment_field :image, id: :item_img, size: "450x300" %>
-        <script type="text/javascript">
-          $(function() {
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-            $('#img_prev').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-                }
-            }
-            $("#item_img").change(function(){
-                readURL(this);
-            });
-          });
-        </script>
-
-      </div>
+      
 
       <div class="col-lg-6">
         <% if @item.errors.any? %>
@@ -42,12 +18,16 @@
         <% end %>
         <table class="table table-hover table-inverse">
           <tr>
+            <td><%= f.label :商品画像 %></td>
+            <td> <%= f.file_field :image, accept: "image/*" %></td>
+          </tr>
+          <tr>
             <td><%= f.label :商品名 %></td>
             <td><%= f.text_field :name %></td>
           </tr>
           <tr>
             <td><%= f.label :商品説明 %></td>
-            <td><%= f.text_area :description %></td>
+            <td><%= f.text_area :introduction %></td>
           </tr>
           <tr>
             <td><%= f.label :ジャンル %></td>
@@ -59,7 +39,7 @@
           </tr>
           <tr>
             <td><%= f.label :販売ステータス %>
-            <td><%= f.select :is_sale, [["販売中", "1"],["販売停止中", "0"]] %></td><br>
+            <td><%= f.select :is_active, [["販売中", "1"],["販売停止中", "0"]] %></td><br>
           </tr>
         </table>
         <div id = "item-action-btn">

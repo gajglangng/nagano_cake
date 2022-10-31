@@ -13,7 +13,8 @@ module NaganoCake
     
     #以下で日本語化の設定をする
     config.i18n.default_locale = :ja 
-    config.autoload_paths += Dir.glob("#{config.root}/app/application/public")
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+    #config.autoload_paths += Dir.glob("#{config.root}/app/application/public")
    
     # Configuration for the application, engines, and railties goes here.
     #
