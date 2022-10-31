@@ -21,7 +21,7 @@
         </tr>
         <tr>
           <td>郵便番号</td>
-          <td><%= @customer.postcode %></td>
+          <td><%= @customer.postal_code %></td>
         </tr>
         <tr>
           <td>住所</td>
@@ -29,14 +29,14 @@
         </tr>
         <tr>
           <td>電話番号</td>
-          <td><%= @customer.phone_number %></td>
+          <td><%= @customer.telephone_number %></td>
         </tr>
         <tr>
           <td>メールアドレス</td>
           <td><%= @customer.email %></td>
         </tr>
         <td>
-          <% if @customer.is_quit == true %>
+          <% if @customer.is_deleted == true %>
             <span class="label label-danger">退会</span>
           <% else %>
             <span class="label label-info">有効</span>
