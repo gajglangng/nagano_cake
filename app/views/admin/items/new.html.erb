@@ -39,7 +39,10 @@
           </tr>
           <tr>
             <td><%= f.label :販売ステータス %>
-            <td><%= f.select :is_active, [["販売中", "1"],["販売停止中", "0"]] %></td><br>
+            
+            <td><%= f.radio_button :is_active, "販売中" %><%= f.label :is_active, "販売中" %></td>
+            
+            <td><%= f.radio_button :is_active, "販売停止中" %><%= f.label :is_active, "販売停止中" %></td><br>
           </tr>
         </table>
         <div id = "item-action-btn">

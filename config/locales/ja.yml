@@ -4,3 +4,8 @@
         payment_method: # カラム名（payment_methodカラムに対して）
           credit_card: "クレジットカード"
           transfer: "銀行振込"
+          
+      item:
+        is_active:
+          sale: "販売中"
+          sold_out: "販売停止中"

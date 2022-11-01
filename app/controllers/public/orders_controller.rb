@@ -13,7 +13,7 @@ class Public::OrdersController < ApplicationController
         @address = Address.find(params[:order][:address_id])
         @order.postal_code = @address.postal_code
         @order.address = @address.address
-    @order.name = @address.name
+        @order.name = @address.name
     end
 
     def create #注文情報登録
