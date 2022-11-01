@@ -1,7 +1,11 @@
 <div class="container-fluid top-page">
   <div class="container-fluid top-page">
   <div class="row-box">
-   
+   <!--ジャンル検索・サイドバー-->
+    <div class="genre-search col-sm-3">
+      <%= render 'public/items/genre_search', genres: @genres %>
+    </div>
+
 
     <div class="main-visual">
         <div class="main-visual-content">
@@ -19,9 +23,9 @@
     <!--新着商品一覧・表示-->
     <div class="item-box">
       <% @new_items.each do |item| %>
-        <div class="item-index">
+        <div class="item-new">
           <%= link_to item_path(item) do %>
-            <span class="item-image"><%= attachment_image_tag item, :image, :fill, 230, 180, format: 'jpeg', alt: '商品画像' %></span>
+            <span class="item-image"><%= image_tag @item.image, size: "450x300", format: 'jpeg', alt: '商品画像' %></span>
           <% end %>
           <p class="name"><%= link_to item.name, item_path(item) %></p>
           <p class="price">￥<%= item.price %></p>
