@@ -19,7 +19,7 @@
           <div class="form-group">
             <label for="inputName3" class="col-sm-3 control-label"><%= f.label :名前 %></label>
               <div class="col-sm-3">
-                <%= f.label :"（姓）" %><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control", id:"inputName3" %>
+                <%= f.label :"(姓)" %><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control", id:"inputName3" %>
               </div>
               <div class="col-sm-3">
                 <%= f.label :"(名)" %><%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "form-control", id:"inputName3" %>
@@ -66,8 +66,8 @@
           <br></br><br></br>
           <div class="form-group">
             <div class="col-md-offset-1 col-md-6 customer-info-button">
-              <%= f.submit "　編集内容を保存　", class:"btn btn-info btn-lg" %>
-              <%= link_to "　退会する　", customers_unsubscribe_path, class:"btn btn-danger pull-right btn-lg" %>
+              <%= f.submit '　編集内容を保存　', class:"btn btn-info btn-lg" %>
+              <%= link_to '　退会する　', customers_unsubscribe_path, class:"btn btn-danger pull-right btn-lg" %>
             </div>
           </div>
         </form>
