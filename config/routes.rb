@@ -34,10 +34,10 @@ Rails.application.routes.draw do
   scope module: :public do
     
     resources :customers, only: [:edit, :update, :show]
-    get '/customers/my_page' => 'customers#show'
-    get '/customers/information/edit'  => 'customers#edit'
     get '/customers/unsubscribe' => 'customers#unsubscribe'
     patch '/customers/withdraw' => 'customers#withdraw' 
+    get '/customers/my_page' => 'customers#show'
+    get '/customers/information/edit'  => 'customers#edit'
     
     resources :items, only: [:index, :show]
     resources :cart_items, only: [:create, :destroy, :update]

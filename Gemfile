@@ -59,3 +59,11 @@ gem 'devise'
 gem 'kaminari','~> 1.2.1'
 gem "enum_help"
 gem 'pry-byebug'
+
+#画像投稿機能の追加
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
+
+gem 'net-smtp'
+gem 'rails-i18n'
+gem 'bootstrap-sass', '~> 3.3.6'
