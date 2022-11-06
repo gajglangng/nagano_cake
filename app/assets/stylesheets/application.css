@@ -103,17 +103,6 @@
   background-color: #FAFAFA;
 }
 
-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: #E2D8C9;
-  border-color: #E2D8C9;
-  font-size: 20px;
-  text-align: center;
-  line-height: 130px;
-  font-family: 'Hannotate TC', 'Avenir', YuGothic, "Bradley Hand", Courier, "Segoe Print", sans-serif;
-}
 
 .button-admin {
   padding-right: 30px;
