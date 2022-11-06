@@ -37,9 +37,9 @@ class Customer < ApplicationRecord
   has_many :orders
   
 
-  #def active_for_authentication?
-  #  super && (self.is_quit == false)
-  #end
+  
+
+  
 
   def now_address
      self.postal_code + self.address + self.last_name + self.first_name

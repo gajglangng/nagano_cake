@@ -6,21 +6,21 @@
       <%= render 'public/items/genre_search', genres: @genres %>
     </div>
     <!--商品一覧・タイトル-->
-    <div class="col-xs-9">
-      <h1>商品一覧　（全<%= @items.count %>件）</h1>
-     
-
-      <% @items.each do |item| %>
-        <div class="item-index">
-          <%= link_to item_path(item) do %>
-            <span class="item-image"><%= image_tag item.image, size: "230x180", format: 'jpeg', alt: '商品画像' %></span>
-          <% end %>
-          <p class="name"><%= link_to item.name, item_path(item) %></p>
-          <p class="price">￥<%= item.price %></p>
-        </div>
+     <div class="col-xs-9">
+      <% if @genre %>
+        <h1><%= @genre.name %>一覧　（全<%= @items.count %>件）</h1>
+      <% else %>
+        <h1>商品一覧　（全<%= @items.count %>件）</h1>
       <% end %>
 
-    <!--ページネーション-->
-    <%= paginate @pages %>
+      <!--商品一覧・表示-->
+      <div class="item-box">
+        <%= render 'public/items/item_index', items: @items %>
+      </div>
+
+      <!--ページネーション-->
+      <div class="pagenation"><%= paginate @pages %></div>
+     </div>
+
   </div>
 </div>
