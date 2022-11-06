@@ -4,7 +4,7 @@ class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
     @customer = Customer.find(current_customer.id)
-    @addresses = @customer.addresses
+    @addresses = @customer.address
   end
 
   def create
@@ -14,7 +14,8 @@ class Public::AddressesController < ApplicationController
       redirect_to addresses_path
     else
       @customer = Customer.find(current_customer.id)
-      @addresses = @customer.addresses
+      @addresses = @customer.address
+      @addresses = Address.all
       render 'index'
     end
   end
@@ -44,7 +45,7 @@ class Public::AddressesController < ApplicationController
 private
 
 def address_params
-  params.require(:address).permit(:name, :address, :postcode)
+  params.require(:address).permit(:name, :address, :postal_code)
 end
 
 end

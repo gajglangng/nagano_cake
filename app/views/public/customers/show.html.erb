@@ -46,7 +46,7 @@
           <h4><strong>配送先</strong></h4>
         </div>
         <div class="col-xs-3">
-          <%=link_to '　一覧を見る　', class:"btn btn-primary" %>
+          <%=link_to '一覧を見る', addresses_path(@customer), class:"btn btn-primary" %>
         </div>
       </div>
       <div class="action_field row">
@@ -54,7 +54,7 @@
           <h4><strong>注文履歴</strong></h4>
         </div>
         <div class="col-xs-3">
-          <%=link_to '　一覧を見る　',class:"btn btn-primary" %>
+          <%=link_to '一覧を見る', orders_path(@customer), class:"btn btn-primary" %>
         </div>
       </div>
     </div>

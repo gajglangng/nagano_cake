@@ -7,13 +7,12 @@
           <%= link_to root_path do %>
             <%= image_tag 'logo.jpg', class: "logo_image", fallback: "ロゴ画像" %>
           <% end %>
-          <span class="header-text">長野県にある小さな洋菓子店</span>
         </div>
       </nav>
 
       <!--メニューボタン-->
       <nav>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="navbar-nav navbar-expand-lg">
           <% if customer_signed_in? %>
             <li class="button greeting">ようこそ　<%= current_customer.last_name %> <%= current_customer.first_name %>さん！　</li>
             <li class="button"><%= link_to " マイページ ", customers_my_page_path, class:"btn btn-default btn-lg" %></li>

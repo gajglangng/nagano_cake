@@ -7,13 +7,12 @@
           <%= link_to root_path do %>
             <%= image_tag 'logo.jpg', class: "logo_image", fallback: "ロゴ画像" %>
           <% end %>
-          <span class="header-text">長野県にある小さな洋菓子店</span>
         </div>
       </nav>
 
       <!--メニューボタン-->
       <nav>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="navbar-nav navbar-expand-lg">
           <% if admin_signed_in? %>
             <li class="button-admin"><%= link_to "商品一覧", admin_items_path, class:"btn btn-default btn-lg admin-button" %> </li>
             <li class="button-admin"><%= link_to "会員一覧", admin_customers_path, class:"btn btn-default btn-lg admin-button" %></li>

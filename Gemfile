@@ -67,3 +67,4 @@ gem "refile-mini_magick"
 gem 'net-smtp'
 gem 'rails-i18n'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'jp_prefecture'

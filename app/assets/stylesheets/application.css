@@ -23,15 +23,6 @@
 }
 
 /*ヘッダー*/
-.navbar-default {
-  height: 130px;
-  background-color: #E2D8C9;
-  border-color: #E2D8C9;
-}
-
-.header-text {
-  font-family: 'Hannotate TC', 'Avenir', YuGothic, "Bradley Hand", Courier, "Segoe Print", sans-serif;
-}
 
 .logo {
   font-size: 20px;
@@ -48,10 +39,6 @@
   text-decoration: none;
 }
 
-.navbar-right {
-  font-size: 20px;
-  margin-top: 20px;
-}
 
 .greeting {
   line-height: 50px;
