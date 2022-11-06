@@ -1,7 +1,10 @@
 class Public::ItemsController < ApplicationController
   def index
+    @items = Item.find(OrderDetail.joins(:item).group('item_id').order('count(item_id) desc').limit(8).pluck(:item_id))
     @customer = current_customer
-    @items = Item.all    
+    #@items = Item.all
+    
+    #@item = Item.find(params[:id])
     #ジャンル検索
     @genres = Genre.where(is_valid: true)
      if @genre = Genre.find_by(name: params[:name])

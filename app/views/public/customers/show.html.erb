@@ -1,5 +1,5 @@
 <div class="title-area-mypage">
-<h3><span class="mypage-title">　マイページ　</span></h3>
+<h3><span class="mypage-title">マイページ</span></h3>
 </div>
 
 <div class="container mypage-container">
@@ -9,14 +9,14 @@
         <div class="col-xs-6">
           <p class="registration-info"><strong>登録情報</strong></p>
         </div>
-        <div class="col-xs-2">
+        <div class="col-md-4">
           <%= link_to '編集する', edit_customer_path, class:"btn btn-primary" %>
         </div>
         <br></br><br>
       <table class="table table-bordered">
         <tbody>
           <tr>
-            <td class="col-md-3 info">氏名</td>
+            <td class="col-md-4 info">氏名</td>
             <td><%= @customer.last_name %> <%= @customer.first_name %></td>
           </tr>
           <tr>
@@ -53,7 +53,7 @@
         <div class="col-xs-4">
           <h4><strong>注文履歴</strong></h4>
         </div>
-        <div class="col-xs-3">
+        <div class="col-sm-5">
           <%=link_to '一覧を見る', orders_path(@customer), class:"btn btn-primary" %>
         </div>
       </div>

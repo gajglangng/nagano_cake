@@ -6,9 +6,9 @@
       <%= render "public/shared/error_messages", resource: resource %>
         <form class="form-horizontal">
           <div class="form-group">
-            <label for="inputName3" class="col-sm-2 control-label"><%= f.label :名前 %></label>
+            <label for="inputName3" class="col-sm-3 control-label"><%= f.label :名前 %></label>
               <div class="col-sm-3">
-                　<%= f.label :"（姓）" %><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control", id:"inputName3" %>
+                　<%= f.label :"(姓)" %><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "form-control", id:"inputName3" %>
               </div>
               <div class="col-sm-3">
                 　<%= f.label :"(名)" %><%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "form-control", id:"inputName3" %>
@@ -16,7 +16,7 @@
           </div>
           <br></br><br></br>
           <div class="form-group">
-            <label for="inputName3" class="col-sm-2 control-label"><%= f.label :フリガナ %></label>
+            <label for="inputName3" class="col-sm-3 control-label"><%= f.label :フリガナ %></label>
               <div class="col-sm-3">
                 　<%= f.label :"(セイ)" %><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", class: "form-control", id:"inputName3" %>
               </div>
@@ -26,42 +26,42 @@
           </div>
           <br></br><br></br>
           <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label"><%= f.label :メールアドレス %></label>
+            <label for="inputEmail3" class="col-sm-3 control-label"><%= f.label :メールアドレス %></label>
               <div class="col-sm-5">
                 　<%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", id:"inputEmail3" %>
               </div>
           </div>
           <br></br><br></br>
           <div class="form-group">
-            <label for="inputPostal_code3" class="col-sm-2 control-label"><%= f.label :"郵便番号(ハイフンなし)" %></label>
+            <label for="inputPostal_code3" class="col-sm-3 control-label"><%= f.label :"郵便番号(ハイフンなし)" %></label>
               <div class="col-sm-5">
                 　　　<%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", class: "form-control", id:"inputPostal_code3" %>
               </div>
           </div>
           <br></br><br></br>
           <div class="form-group">
-            <label for="inputAddress3" class="col-sm-2 control-label"><%= f.label :住所 %></label>
+            <label for="inputAddress3" class="col-sm-3 control-label"><%= f.label :住所 %></label>
               <div class="col-sm-5">
                 　<%= f.text_field :address, autofocus: true, autocomplete: "address", class: "form-control", id:"inputAddress3" %>
               </div>
           </div>
           <br></br><br></br>
           <div class="form-group">
-            <label for="inputTelephone_number3" class="col-sm-2 control-label"><%= f.label :"電話番号(ハイフンなし)" %></label>
+            <label for="inputTelephone_number3" class="col-sm-3 control-label"><%= f.label :"電話番号(ハイフンなし)" %></label>
               <div class="col-sm-5">
                 　<%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number", class: "form-control", id:"inputTelephonenumber3" %>
               </div>
           </div>
           <br></br><br></br>
           <div class="form-group">
-            <label for="inputPassward3" class="col-sm-2 control-label"><%= f.label :"パスワード(6文字以上)" %></label>
+            <label for="inputPassward3" class="col-sm-3 control-label"><%= f.label :"パスワード(6文字以上)" %></label>
               <div class="col-sm-5">
                 　<%= f.password_field :password, autocomplete: "new-password", class: "form-control", id:"inputPassward3" %>
               </div>
           </div>
           <br></br><br></br>
           <div class="form-group">
-            <label for="inputPassward3" class="col-sm-2 control-label"><%= f.label :"パスワード(確認用)" %></label>
+            <label for="inputPassward3" class="col-sm-3 control-label"><%= f.label :"パスワード(確認用)" %></label>
               <div class="col-sm-5">
                 　<%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", id:"inputPassward3" %>
               </div>

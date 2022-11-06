@@ -1,9 +1,9 @@
 <!--商品一覧・表示の部分テンプレート-->
 
-<% items.each do |item| %>
+<% @items.each do |item| %>
   <div class="item-index">
     <%= link_to item_path(item) do %>
-      <span class="item-image"><%= image_tag item.image, size: "230x180", format: 'jpeg', alt: '商品画像' %></span>
+      <span class="item-image"><%= image_tag @items.image, size: "230x180", format: 'jpeg', alt: '商品画像' %></span>
     <% end %>
     <p class="name"><%= link_to item.name, item_path(item) %></p>
     <p class="price">￥<%= item.price.to_s(:delimited) %></p>
