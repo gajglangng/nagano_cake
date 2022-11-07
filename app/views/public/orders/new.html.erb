@@ -19,7 +19,7 @@
       <div class="form-group">
         　　<%= radio_button_tag :delivery_address_type, "ご自身の住所", checked: true %>
         <%= f.label "ご自身の住所", class: "address_label" %></br>
-          　　　　〒<%= current_customer.postcode %>
+          　　　　〒<%= current_customer.postal_code %>
             　<%= current_customer.address %></br>
             　　　　<%= current_customer.last_name %><%= current_customer.first_name %>
       </div>

@@ -5,11 +5,8 @@
 <div class="container-fluid">
   <div class="row-sm-12 cart-info-table">
 
-		<% if @cart_items.exists? %>
-			<% flash.each do |key, value| %>
-	      <%= content_tag(:div, value, class: "#{key} #{key}-position") %>
-	    <% end %>
-
+		<% if @cart_items.present?| %>
+			
 			<div id = destroyall_button>
 			<%= link_to " カートを空にする ", cart_items_destroy_all_path, method: :delete,data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %>
 			</div>
