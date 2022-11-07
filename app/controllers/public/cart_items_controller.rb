@@ -13,21 +13,18 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    @amount = params[:amount] ? params[:amount] : params[:cart_item][:amount]
-    @cart_item = CartItem.new({customer_id:params[:customer_id], item_id:params[:item_id], amount:@amount})
-    binding.pry
-    if (CartItem.where(item_id: params[:item_id]).where(customer_id: current_customer.id).exists?) && (@amount.present?)
-      @cart_item = CartItem.find_by(item_id: params[:item_id],customer_id: current_customer.id)
-      @cart_item.amount += @amount.to_i
-      @cart_item.save
-      redirect_to action: :cart
-    elsif @cart_item.save
-      redirect_to action: :cart
-    else
-      @item = Item.find(params[:item_id])
+    #@amount = params[:amount] ? params[:amount] : params[:cart_item][:amount]
+    @cart_item = CartItem.new(cart_item_params)
+    #@item = Item.find(cart_item_params)
+    
+    #@cart_item.customer_id = current_customer.id
+    #if @cart_item.save
+    #  redirect_to action: :cart
+    #else
+      #@item = Item.find(params[:item_id])
       @genres = Genre.where(is_valid: true)
-      render "public/items/show"
-    end
+      #render "public/items/show"
+    #end
   end
 
   def update
@@ -52,11 +49,8 @@ class Public::CartItemsController < ApplicationController
 
 
 private
+ 
   def cart_item_params
-      params.require(:cart_item).permit(:item_id, :amount)
-  end
-
-  def cart_item_count_params
-    params.require(:cart_item).permit(:customer_id, :item_id, :amount)
+    params.permit(:amount)
   end
 end

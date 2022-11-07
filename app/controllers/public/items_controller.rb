@@ -3,7 +3,8 @@ class Public::ItemsController < ApplicationController
     
     #@items = Item.find(OrderDetail.joins(:item).group('item_id').order('count(item_id) desc').limit(8).pluck(:item_id))
     @customer = current_customer
-    @items = Item.all
+    #@items = Item.all
+    @items=Item.page(params[:page]).per(8)
     
     #@item = Item.find(params[:id])
     #ジャンル検索

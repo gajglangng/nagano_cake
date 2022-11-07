@@ -30,9 +30,8 @@
           </div>
         <% end %>
       <% end %>
-        <span class="col-xs-4">
-          <%= f.select :item_count, options_for_select((1..10).to_a), {include_blank: '個数選択'}, class: 'form-control' %></span>
-          <%= f.hidden_field :title, :value => "楽しいRuby" %>
+        <span class="col-xs-2">
+          <%= f.select :amount, *[1..10], {include_blank: '個数選択'}, class: 'form-control' %></span>
           <%= f.submit :カートに入れる, class: "btn btn-default btn-md btn-primary create-btn" %>
       <% end %>
       <% else %>

@@ -7,7 +7,7 @@
     </tr>
   </thead>
   <tbody class="panel-body">
-    <% genres.each do |genre| %>
+    <% @genres.each do |genre| %>
       <tr>
         <td><h5 class="genre-name"><%= link_to genre.name, items_path(name: genre.name) %></h5></td>
       </tr>

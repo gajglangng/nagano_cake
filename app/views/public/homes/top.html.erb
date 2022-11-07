@@ -26,7 +26,7 @@
                 <% @new_items.each do |item| %>
                     <div class="item-new">
                     <%= link_to item_path(item) do %>
-                    <span class="item-image"><%= image_tag @item.image, size: "450x300", format: 'jpeg', alt: '商品画像' %></span>
+                    <span class="item-image"><%= image_tag item.image, size: "450x300", format: 'jpeg', alt: '商品画像' %></span>
                     <% end %>
                     <p class="name"><%= link_to item.name, item_path(item) %></p>
                     <p class="price">￥<%= item.price %></p>
