@@ -25,7 +25,12 @@ class Public::ItemsController < ApplicationController
     @customer = current_customer
     @item = Item.find(params[:id])
     @genres = Genre.where(is_valid: true)
+    @cart_item =CartItem
   end
   
+  private
+    def item_params
+      params.require(:items).permit(:genre_id, :name, :introduction, :image_id, :price)
+    end
   
 end

@@ -40,7 +40,9 @@ class Customer < ApplicationRecord
   
 
   
-
+  def prepare_cart
+   cart_items || create_cart_item
+  end
   
 
   def now_address

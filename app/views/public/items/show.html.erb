@@ -17,21 +17,14 @@
       <p><span class="item-price">￥<%= ((@item.price * 1.1).round(2)).ceil.to_s(:delimited) %></span>　(税込)</p>
       <div class="buttons"></div>
 
-      <% if customer_signed_in? %>
+      <% if @item.is_active == TRUE %>　<!--商品販売中の場合-->
       <%= form_with model:@cart_item, url: cart_items_path, method: :post, local:true do |f| %>
-      <% if @cart_item.present? %>
-        <% if @cart_item.errors.any? %>
-          <div class="alert alert-position">
-            <ul>
-              <% @cart_item.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-      <% end %>
+      
         <span class="col-xs-2">
           <%= f.select :amount, *[1..10], {include_blank: '個数選択'}, class: 'form-control' %></span>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+           <!--第一引数にオブジェクト名item_id、第二引数部分にvalueで受け渡す値 @item.idを指定
+            cartitem controllerの cart_items.find_by(item_id:に送ることができる-->
           <%= f.submit :カートに入れる, class: "btn btn-default btn-md btn-primary create-btn" %>
       <% end %>
       <% else %>

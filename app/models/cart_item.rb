@@ -4,6 +4,8 @@ class CartItem < ApplicationRecord
 
   validates :amount, presence: {message: 'を選択してください'}, numericality: { only_integer: true, greater_than: 0}
   
+  has_one_attached :image
+  
   ## 小計を求めるメソッド
   def subtotal
     item.with_tax_price * amount
