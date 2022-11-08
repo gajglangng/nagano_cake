@@ -17,14 +17,14 @@
     
       <p style="font-weight: bold;font-size: 20px;">お届け先</p>
       <div class="form-group">
-        　　<%= radio_button_tag :delivery_address_type, "ご自身の住所", checked: true %>
-        <%= f.label "ご自身の住所", class: "address_label" %></br>
+        　　<%= radio_button_tag :delivery_address_type, "ご自身の住所", checked: "checked" %>
+              <%= f.label "ご自身の住所", class: "address_label" %></br>
           　　　　〒<%= current_customer.postal_code %>
-            　<%= current_customer.address %></br>
+                　<%= current_customer.address %></br>
             　　　　<%= current_customer.last_name %><%= current_customer.first_name %>
       </div>
       <div class="form-group">
-        　　<%= radio_button_tag :delivery_address_type, "登録済住所から選択" %>
+        　　<%= radio_button_tag :delivery_address_type, "登録済み住所から選択" %>
         <%= f.label "登録済住所から選択", class: "address_label" %>
         <br>
           <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
@@ -35,21 +35,21 @@
         <%= f.label "新しいお届け先", class: "address_label" %>
       </div>
           <div class="form-group">
-            <label for="inputPostcode3" class="col-sm-3 control-label">　　<%= f.label :"郵便番号(ハイフンなし)" %></label>
+            <label for="inputPostcode3" class="col-sm- control-label"><%= f.label :"郵便番号(ハイフンなし)" %></label>
               <div class="col-sm-3">
                 <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", class: "form-control", id:"inputPostcode3" %>
               </div>
           </div>
           <br></br><br>
           <div class="form-group">
-            <label for="inputAddress3" class="col-sm-3 control-label">　　<%= f.label :住所 %></label>
+            <label for="inputAddress3" class="col-sm-3 control-label"><%= f.label :住所 %></label>
               <div class="col-sm-8">
                 <%= f.text_field :address, autofocus: true, autocomplete: "address", class: "form-control", id:"inputAddress3" %>
               </div>
           </div>
           <br></br>
           <div class="form-group">
-            <label for="inputName3" class="col-sm-3 control-label">　　<%= f.label :宛名 %></label>
+            <label for="inputName3" class="col-sm-3 control-label"><%= f.label :宛名 %></label>
               <div class="col-sm-3">
                 <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", id:"inputName3" %>
               </div>

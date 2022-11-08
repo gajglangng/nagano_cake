@@ -32,8 +32,8 @@ class Public::CartItemsController < ApplicationController
             redirect_to cart_items_path
             # もしカート内に「同じ」商品がない場合は通常の保存処理 
         elsif @cart_item.save
-            　@cart_items = current_customer.cart_items.all
-            　render 'cart'
+              @cart_items = current_customer.cart_items.all
+              render 'cart'
         else　# 保存できなかった場合
             render 'cart'
         end
@@ -47,27 +47,26 @@ class Public::CartItemsController < ApplicationController
   end
 
   def update
-    @cart_item = CartItem.find(params[:item_id])
-    if @cart_item.update(cart_item_count_params)
-        redirect_to action: :cart
+    @cart_item = CartItem.find(params[:id])
+    if @cart_item.update(cart_item_params)
+        redirect_to cart_items_path
     else
-      redirect_to action: :cart
+      redirect_to cart_items_path
     end
   end
 
   def destroy
     cart_item = CartItem.find(params[:id])
     cart_item.destroy
-    @cart_items = CartItem.all
-     redirect_to action: :cart
+    #@cart_items = CartItem.all
+     redirect_to cart_items_path
   end
 
 
   def destroy_all
     #CartItem.where(customer_id: current_customer.id).destroy_all
-    cart_items = CartItem.all
-    cart_items.destroy_all
-     redirect_to action: :cart
+   current_customer.cart_items.destroy_all
+     redirect_to cart_items_path
   end
 
   

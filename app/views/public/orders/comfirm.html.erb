@@ -21,7 +21,7 @@
       	  <% @cart_items.each do |cart_item| %>
       		<tr>
       			<td>
-      			  <%= attachment_image_tag cart_item.item, :image, :fill, 50, 50, format: 'jpeg', alt: "商品画像" %>
+      			  <%= image_tag cart_item.item.image, size: "50x50", format: 'jpeg', alt: "商品画像" %>
 				      <%= cart_item.item.name %>
       			</td>
       			<td><%= ((cart_item.item.price * 1.1).round(2)).ceil.to_s(:delimited) %>円</td>
@@ -38,8 +38,23 @@
       <%= @order.payment_method %></p>
       </br></br>
       <p><span style="font-size: 18px;font-weight: bold;">お届け先</span>　　
-      〒<%= @order.postcode %><%= @order.address %></br>　　　　　　 
-      <%= @order.name %></p>
+      〒<%= @order.postal_code %>
+        <%= @order.address %></br>　　　　　　 
+        <%= @order.name %> 様</p>
+        
+       <%= form_for @order, url: orders_path do |f| %>
+        <%= f.hidden_field :member_id %>
+        <%= f.hidden_field :postage %>
+        <%= f.hidden_field :total_payment %>
+        <%= f.hidden_field :payment_method %>
+        <%= f.hidden_field :name %>
+        <%= f.hidden_field :address %>
+        <%= f.hidden_field :postal_code %>
+        <%= f.hidden_field :order_status %>
+        </br>
+        <div class="submit-button"><%= f.submit "　購入を確定する　", class: "submit-button btn btn-success btn-lg" %></div>
+      <% end %>
+      
     </div>
 
     <div class="col-sm-3">
@@ -47,15 +62,17 @@
       <table class="table table-bordered">
         <tr>
           <th class="success">送料</th>
-          <td>円</td>
+           <% @order.postage = 800 %>
+           <td><%= @order.postage %></td>
         </tr>
         <tr>
           <th class="success">商品合計</th>
-          <td><%= @total_price.to_s(:delimited) %>円</td>
+          <td><%= total.to_i %></td>
         </tr>
         <tr>
           <th class="success">請求金額</th>
-          <td><%= @billing_amount.to_s(:delimited) %>円</td>
+          <% @order.total_payment = @order.postage + total.to_i %>
+          <td><%= @order.total_payment %></td>
         </tr>
       </table>
     </div>

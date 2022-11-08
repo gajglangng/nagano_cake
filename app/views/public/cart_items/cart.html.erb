@@ -8,7 +8,7 @@
 		<% if @cart_items.present?| %>
 			
 			<div id = destroyall_button>
-			 <%= link_to " カートを空にする ", cart_items_destroy_all_path, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %>
+			 <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %>
 			</div>
 			<div>
 			<table class="table table-bordered">
@@ -43,6 +43,7 @@
          
 						<td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete,data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %></td>
 					</tr>
+						<% total += subtotal %>　<!--アイテムごとに合計金額totalに反映 計算しておく-->
 					<% end %>
 				 <% end %>	
 				</tbody>
