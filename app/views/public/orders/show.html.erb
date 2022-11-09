@@ -11,7 +11,7 @@
       <table class="table table-bordered">
         <tr>
           <th class="success col-xs-3">注文日</th>
-          <%= order.created_at.to_s(:datetime_jp) %>
+          <%= l @order.created_at %>
         </tr>
         <tr>
           <th class="success">配送先</th>

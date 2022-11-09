@@ -17,7 +17,7 @@
       <p><span class="item-price">￥<%= ((@item.price * 1.1).round(2)).ceil.to_s(:delimited) %></span>　(税込)</p>
       <div class="buttons"></div>
 
-      <% if @item.is_active == true %>　<!--商品販売中の場合-->
+     
       <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
       
         <span class="col-xs-2">
@@ -27,8 +27,7 @@
             cartitem controllerの cart_items.find_by(item_id:に送ることができる-->
           <%= f.submit :カートに入れる, class: "btn btn-default btn-md btn-primary create-btn" %>
       <% end %>
-      <% else %>
-      <% end %>
+
     </div>
     
   </div>

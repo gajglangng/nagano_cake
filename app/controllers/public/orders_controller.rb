@@ -70,7 +70,7 @@ class Public::OrdersController < ApplicationController
     end
 
     def show #注文履歴詳細
-        @item = Item.find(params[:item_id])
+        @item = Item.find(params[:id])
         @order = @item.order.new
     end
 

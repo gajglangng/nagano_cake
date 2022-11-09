@@ -3,30 +3,27 @@ class Public::CartItemsController < ApplicationController
   before_action :authenticate_customer!
 
   def cart
-    
+    @customer = current_customer
+    @cart_items = CartItem.where(customer_id: current_customer.id)
     #@cart_item = CartItem.all
   end
 
   def create
-    #@cart_item = current_customer.cart_items.new(cart_item_params)
+    @amount = params[:amount] ? params[:amount] : params[:cart_item][:amount]
     @cart_item = CartItem.new({customer_id:params[:customer_id], item_id:params[:item_id], amount:@amount})
-     if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]).present?
-                          #元々カート内にあるもの「item_id」　
-                          #今追加した　　　　　　　params[:cart_item][:item_id])
-            cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
-            cart_item.amount += params[:cart_item][:amount].to_i
-            cart_item.save
-            redirect_to cart_items_path
-            
-     # もしカート内に「同じ」商品がない場合は通常の保存処理 
-     elsif @cart_item.save
-         　@cart_items = current_customer.cart_items.all
-            render 'cart'
-     else　# 保存できなかった場合
-            render 'cart'
-     end         
-    
-   
+    # binding.pry
+    if (CartItem.where(item_id: params[:item_id]).where(customer_id: current_customer.id).exists?) && (@amount.present?)
+      @cart_item = CartItem.find_by(item_id: params[:item_id],customer_id: current_customer.id)
+      @cart_item.amount += @amount.to_i
+      @cart_item.save
+      redirect_to "public/cart_items/cart"
+    elsif @cart_item.save
+      redirect_to "public/cart_items/cart"
+    else
+      @item = Item.find_by(params[:item_id])
+      @genres = Genre.where(is_valid: true)
+      render "public/cart_items/cart"
+    end
   end
 
   def update
@@ -57,6 +54,6 @@ class Public::CartItemsController < ApplicationController
 private
  
   def cart_item_params
-    params.require(:cart_item).permit(:item_id, :price, :amount)
+    params.require(:cart_item).permit(:amount, :item_id)
   end
 end

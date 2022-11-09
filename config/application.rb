@@ -24,10 +24,6 @@ module NaganoCake
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     
-    # アプリケーション側のタイムゾーン
-    config.time_zone = 'Tokyo'
-    # DB側から受け取った時刻をどのタイムゾーンとして解釈するか
-    config.active_record.default_timezone = :local  
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
+    config.time_zone = 'Asia/Tokyo'
   end
 end
