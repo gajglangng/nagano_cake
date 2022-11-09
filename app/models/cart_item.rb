@@ -1,5 +1,6 @@
 class CartItem < ApplicationRecord
   belongs_to :customer
+  belongs_to :order
   belongs_to :item
 
   validates :amount, presence: {message: 'を選択してください'}, numericality: { only_integer: true, greater_than: 0}

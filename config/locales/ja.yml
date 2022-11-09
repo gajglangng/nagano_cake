@@ -9,3 +9,7 @@
         is_active:
           sale: "販売中"
           sold_out: "販売停止中"
+          
+      time:
+        formats:
+          default: "%Y/%m/%d"  

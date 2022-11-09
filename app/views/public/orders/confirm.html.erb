@@ -25,8 +25,8 @@
 				      <%= cart_item.item.name %>
       			</td>
       			<td><%= ((cart_item.item.price * 1.1).round(2)).ceil.to_s(:delimited) %>円</td>
-      			<td><%= cart_item.item_count %>個</td>
-      			<td><%= ((((cart_item.item.price * 1.1).round(2)).ceil) * (cart_item.item_count)).to_s(:delimited) %>円</td>
+      			<td><%= cart_item.amount %>個</td>
+      			<td><%= ((((cart_item.item.price * 1.1).round(2)).ceil) * (cart_item.amount)).to_s(:delimited) %>円</td>
       		</tr>
       		<% end %>
       	</tbody>
@@ -43,7 +43,7 @@
         <%= @order.name %> 様</p>
         
        <%= form_for @order, url: orders_path do |f| %>
-        <%= f.hidden_field :member_id %>
+       
         <%= f.hidden_field :postage %>
         <%= f.hidden_field :total_payment %>
         <%= f.hidden_field :payment_method %>
@@ -52,7 +52,7 @@
         <%= f.hidden_field :postal_code %>
         <%= f.hidden_field :order_status %>
         </br>
-        <div class="submit-button"><%= f.submit "　購入を確定する　", class: "submit-button btn btn-success btn-lg" %></div>
+        <div class="submit-button"><%= f.submit "購入を確定する", class: "submit-button btn btn-success btn-lg" %></div>
       <% end %>
       
     </div>
@@ -62,17 +62,15 @@
       <table class="table table-bordered">
         <tr>
           <th class="success">送料</th>
-           <% @order.postage = 800 %>
-           <td><%= @order.postage %></td>
+           <td><%= @order_postage %></td>
         </tr>
         <tr>
           <th class="success">商品合計</th>
-          <td><%= total.to_i %></td>
+          <td><%=@total_price.to_s(:delimited) %>円</td>
         </tr>
         <tr>
           <th class="success">請求金額</th>
-          <% @order.total_payment = @order.postage + total.to_i %>
-          <td><%= @order.total_payment %></td>
+          <td><%= @total_payment.to_s(:delimited) %>円</td>
         </tr>
       </table>
     </div>
