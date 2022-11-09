@@ -17,18 +17,21 @@
       <p><span class="item-price">￥<%= ((@item.price * 1.1).round(2)).ceil.to_s(:delimited) %></span>　(税込)</p>
       <div class="buttons"></div>
 
-     
-      <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
-      
-        <span class="col-xs-2">
-          <%= f.select :amount, *[1..10], {include_blank: '個数選択'}, class: 'form-control' %></span>
-          <%= f.hidden_field :item_id, :value => @item.id %>
-           <!--第一引数にオブジェクト名item_id、第二引数部分にvalueで受け渡す値 @item.idを指定
-            cartitem controllerの cart_items.find_by(item_id:に送ることができる-->
-          <%= f.submit :カートに入れる, class: "btn btn-default btn-md btn-primary create-btn" %>
-      <% end %>
-
-    </div>
-    
-  </div>
+      <div class = "row">
+        <div class="col-md-3 ml-auto">
+          <% if customer_signed_in? %>
+            <% if @item.is_active == true %>
+              <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
+                <%= f.select :amount, *[1..10], {include_blank: '個数選択'}, class: 'form-control' %>
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <%= f.submit :カートに入れる, class: "btn btn-default btn-md btn-primary create-btn" %>
+               <% end %>
+            <% else %>
+              <p>在庫切れ</p>
+            <% end %>
+          <% else %>
+            <%= link_to "ログイン", new_customer_session_path %>してから購入画面にお進みください。
+          <% end %>
+        </div>
+      </div>
 </div>

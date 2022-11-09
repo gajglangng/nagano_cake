@@ -35,7 +35,7 @@ class Public::OrdersController < ApplicationController
 
         # 新規住所入力であれば
         when "新しいお届け先"
-            @order.post_code = params[:order][:postal_code]
+            @order.postal_code = params[:order][:postal_code]
             @order.address = params[:order][:address]
             @order.name = params[:order][:name]
         else
@@ -70,8 +70,9 @@ class Public::OrdersController < ApplicationController
     end
 
     def show #注文履歴詳細
-        @item = Item.find(params[:id])
-        @order = @item.order.new
+        
+        @order = Order.find(params[:id])
+        @order_details = @order.order_details
     end
 
     # 注文履歴
