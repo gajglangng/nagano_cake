@@ -26,16 +26,13 @@ class Public::CartItemsController < ApplicationController
                                                               #.to_iとして数字として扱う
     #@cart_item = CartItem.new({customer_id:params[:customer_id], item_id:params[:item_id], amount:@amount})
     #@item = Item.find(cart_item_params)
-    
-            cart_item.save
-            #redirect_to action: :cart
             redirect_to cart_items_path
             # もしカート内に「同じ」商品がない場合は通常の保存処理 
         elsif @cart_item.save
               @cart_items = current_customer.cart_items.all
-              render 'cart'
+              redirect_to cart_items_path
         else　# 保存できなかった場合
-            render 'cart'
+            render "public/items/show"
         end
 
     #@item = Item.find(params[:item_id])

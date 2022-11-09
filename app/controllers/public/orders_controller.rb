@@ -55,32 +55,33 @@ class Public::OrdersController < ApplicationController
         @order.postage = 800
         @order.save
         
-          current_customer.cart_items.each do |cart_item|
-            @order_detail = OrderDetail.new 
-            @order_detail.order_id = @order.id
-            @order_detail.item_id = cart_item.item_id
-            @order_detail.amount = cart_item.amount
-            @order_detaile.price = (cart_item.item.price * 1.1).round(2).ceil
-            @order_detail.save
-          end
-             redirect_to orders_complete_path
-             cart_items.destroy_all
+        # ordered_itmemの保存
+        current_customer.cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
+          @order_detail = OrderDetail.new #初期化宣言
+          @order_detail.item_id = cart_item.item_id #商品idを注文商品idに代入
+          @order_detail.amount = cart_item.amount #商品の個数を注文商品の個数に代入
+          @order_detail.price = (cart_item.item.price*1.1).floor #消費税込みに計算して代入
+          @order_detail.order_id =  @order.id #注文商品に注文idを紐付け
+          @order_detail.save #注文商品を保存
+        end #ループ終わり
+            
+            current_customer.cart_items.destroy_all
+            redirect_to orders_complete_path
     end
 
     def show #注文履歴詳細
-        #@customer = current_customer
-        #@order = Order.find(params[:id])
-        @order_items = OrderDetail.where(order_id: params[:id])
+        @item = Item.find(params[:item_id])
+        @order = @item.order.new
     end
 
     # 注文履歴
     def index
-        @orders = current_member.orders
+        @orders = current_customer.orders.all
     end
 
     private
      def order_params
-        params.require(:order).permit(:payment_method, :postage, :postal_code, :address, :name, :customer_id, :total_payment, :order_status)
+        params.require(:order).permit(:payment_method, :postage, :postal_code, :address, :name, :customer_id, :total_payment, :order_status, :item_id)
      end
      
      def delivery_address_type_params
