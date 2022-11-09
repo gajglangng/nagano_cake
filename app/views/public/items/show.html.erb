@@ -18,7 +18,7 @@
       <div class="buttons"></div>
 
       <% if @item.is_active == true %>　<!--商品販売中の場合-->
-      <%= form_with model:@cart_item, url: cart_items_path, method: :post, local:true do |f| %>
+      <%= form_with model: @cart_item, url: cart_items_path, method: :post, local: true do |f| %>
       
         <span class="col-xs-2">
           <%= f.select :amount, *[1..10], {include_blank: '個数選択'}, class: 'form-control' %></span>
