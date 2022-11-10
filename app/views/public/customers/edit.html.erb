@@ -11,10 +11,11 @@
       </div>
     <% end %>
     <div class="title-area-edit">
-      <h3 class="mypage-edit-title">　会員情報編集　</h3>
+      <h3 class="mypage-edit-title">会員情報編集</h3>
     </div>
     <div class="col-md-10 col-md-offset-2">
-      <%= form_with url: customer_path, model:@customer,　id: 'new_user', class: 'new_user', local: true do |f| %>
+      <%= form_with model: @customer, url: customer_path, method: :patch, class: 'new_user', local: true do |f| %>
+        
         <form class="form-horizontal">
           <div class="form-group">
             <label for="inputName3" class="col-sm-3 control-label"><%= f.label :名前 %></label>
@@ -64,10 +65,11 @@
               </div>
           </div>
           <br></br><br></br>
+          
           <div class="form-group">
             <div class="col-md-offset-1 col-md-6 customer-info-button">
               <%= f.submit "編集内容を保存", class:"btn btn-info btn-lg" %>
-              <%= link_to "退会する", customers_unsubscribe_path, class:"btn btn-danger pull-right btn-lg" %>
+              <%= link_to '退会する', customers_unsubscribe_path, class:"btn btn-danger pull-right btn-lg" %>
             </div>
           </div>
         </form>

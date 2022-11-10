@@ -70,7 +70,6 @@ class Public::OrdersController < ApplicationController
     end
 
     def show #注文履歴詳細
-        
         @order = Order.find(params[:id])
         @order_details = @order.order_details
     end
@@ -80,6 +79,15 @@ class Public::OrdersController < ApplicationController
         @orders = current_customer.orders.all
     end
 
+    def complete #注文完了
+
+    end
+    
+    #def after_orders_comfirm_path_for(resource)
+     # orders_complete_path(resource)
+    #end
+
+
     private
      def order_params
         params.require(:order).permit(:payment_method, :postage, :postal_code, :address, :name, :customer_id, :total_payment, :order_status, :item_id)
@@ -88,6 +96,5 @@ class Public::OrdersController < ApplicationController
      def delivery_address_type_params
         params.permit(:delivery_address_type)
      end
-     
      
 end

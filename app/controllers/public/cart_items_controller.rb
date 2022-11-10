@@ -13,8 +13,18 @@ class Public::CartItemsController < ApplicationController
     #@cart_item = CartItem.find(params[:item_id])
     @cart_item = current_customer.cart_items.new(cart_item_params)
     @cart_item.save
-    redirect_to cart_items_path
     
+    if (CartItem.where(item_id: params[:item_id]).where(customer_id: current_customer.id).exists?) && (@amount.present?)
+      @cart_item = CartItem.find_by(item_id: params[:item_id],customer_id: current_customer.id)
+      @cart_item.amount += @amount.to_i
+      @cart_item.save
+       redirect_to cart_items_path
+    elsif @cart_item.save
+       redirect_to cart_items_path
+    else
+      @item = Item.find(params[:item_id])
+      render "public/items/show"
+    end
     
   end
 
@@ -25,17 +35,17 @@ class Public::CartItemsController < ApplicationController
   end
 
   def destroy
-    @cart_item = CartItem.find(params[:id])
-    @cart_item.destroy
-    #@cart_items = CartItem.all
+    #binding.pry
+    cart_item = CartItem.find(params[:id])
+    cart_item.destroy
     redirect_to cart_items_path
   end
 
 
   def destroy_all
-    @cart_items = current_customer.cart_items
-    cart_items.destroy_all
-    redirect_to cart_items_path
+    @Cart_item.destroy_all
+    current_customer.cart_items.destroy_all
+    redirect_to cart_items_path, notice: 'カートが空になりました。' 
   end
 
   
