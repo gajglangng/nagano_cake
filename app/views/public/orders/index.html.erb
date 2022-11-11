@@ -27,15 +27,15 @@
       			    <%= order.address %><br>
       			    <%= order.name %></td>
       			<td>
-      			  <% order.order_details.each do |order_detail| %>
-      			    <%= order_detail.item.name %></br>
+      			  <% @orders.each do |order_detail| %>
+      			    
       			  <% end %>
       			</td>
       			<td><%= number_with_delimiter(order.total_payment) %>円</td>
       			<td><%= order.status %></td>
       			<td><%= link_to '表示する', order_path(order), class: "btn btn-info" %></td>
       		</tr>
-      		<% end %>
+      	  <% end %>
       	</tbody>
       </table>
     </div>

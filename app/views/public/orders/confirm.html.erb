@@ -42,7 +42,7 @@
         <%= @order.address %></br>　　　　　　 
         <%= @order.name %> 様</p>
         
-      <%= form_with model: @order, url: orders_path do |f| %>
+      <%= form_with model: @order,  do |f| %>
        
         <%= f.hidden_field :postage %>
         <%= f.hidden_field :total_payment %>

@@ -9,7 +9,7 @@ class Public::OrdersController < ApplicationController
     end
 
     def confirm
-         @order = Order.new(order_params)
+         @order = Order.new
          @cart_items = CartItem.where(customer_id: current_customer.id)
          @order_postage = 800
          @total_price = 0
@@ -71,12 +71,12 @@ class Public::OrdersController < ApplicationController
 
     def show #注文履歴詳細
         @order = Order.find(params[:id])
-        @order_details = @order.order_details
     end
 
     # 注文履歴
     def index
         @orders = current_customer.orders.all
+        
     end
 
     def complete #注文完了

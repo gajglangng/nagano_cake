@@ -9,23 +9,23 @@ class Public::CartItemsController < ApplicationController
   end
 
   def create
-    #binding.pry
-    #@cart_item = CartItem.find(params[:item_id])
-    @cart_item = current_customer.cart_items.new(cart_item_params)
-    @cart_item.save
-    
-    if (CartItem.where(item_id: params[:item_id]).where(customer_id: current_customer.id).exists?) && (@amount.present?)
-      @cart_item = CartItem.find_by(item_id: params[:item_id],customer_id: current_customer.id)
-      @cart_item.amount += @amount.to_i
-      @cart_item.save
-       redirect_to cart_items_path
-    elsif @cart_item.save
-       redirect_to cart_items_path
+    @cart_item_check = CartItem.find_by(customer_id: current_customer.id, item_id: params[:cart_item][:item_id])
+    if @cart_item_check
+      @cart_item_check.amount += params[:cart_item][:amount].to_i
+      @cart_item_check.save
+      flash[:success] = "カートに存在済のアイテムです"
+      redirect_to cart_items_path
     else
-      @item = Item.find(params[:item_id])
-      render "public/items/show"
+      @cart_item = CartItem.new(cart_item_params)
+      @cart_item.customer_id = current_customer.id
+      if @cart_item.save
+        flash[:success] = "カートに追加しました"
+        redirect_to cart_items_path
+      else
+        flash[:danger] = "予期せぬエラーが発生しました"
+        redirect_back(fallback_location: root_path)
+      end
     end
-    
   end
 
   def update
@@ -34,18 +34,15 @@ class Public::CartItemsController < ApplicationController
     redirect_to cart_items_path
   end
 
-  def destroy
-    #binding.pry
-    cart_item = CartItem.find(params[:id])
-    cart_item.destroy
-    redirect_to cart_items_path
-  end
-
-
   def destroy_all
-    @Cart_item.destroy_all
     current_customer.cart_items.destroy_all
     redirect_to cart_items_path, notice: 'カートが空になりました。' 
+  end
+
+  def destroy
+    @cart_item = CartItem.find(params[:id])
+    @cart_item.destroy
+    redirect_to cart_items_path
   end
 
   
