@@ -11,7 +11,6 @@
       <p style="font-weight: bold;font-size: 20px;">支払方法</p>
       　<%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
         <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
-
         <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
         <%= f.label :payment_method, Order.payment_methods_i18n[:transfer]%>
     <br></br>

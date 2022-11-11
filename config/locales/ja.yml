@@ -14,4 +14,11 @@
           sale: "販売中"
           sold_out: "販売停止中"
       
+      order:
+       order_status:
+        　waiting: "入金待ち"
+        　paid_up: "入金済み"
+        　making: "製作中"
+        　preparing: "発送準備中"
+        　shipped: "発送済み"
       

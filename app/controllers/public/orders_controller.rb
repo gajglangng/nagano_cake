@@ -18,8 +18,8 @@ class Public::OrdersController < ApplicationController
          @total_price += tax_price
         end
          
-         @total_payment = @order_postage + @total_price
-      
+        @total_payment = @order_postage + @total_price
+        
         case params[:delivery_address_type]
         when "ご自身の住所"
             @order.postal_code = current_customer.postal_code
@@ -73,12 +73,16 @@ class Public::OrdersController < ApplicationController
     end
 
     def show #注文履歴詳細
-        @order = Order.find(params[:id])
+      @order = Order.find(params[:id])
+      @order_details = OrderDetail.where(order_id: params[:id])
     end
 
     # 注文履歴
     def index
-      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
+      @customer = current_customer
+      @orders = current_customer.orders.all
+      #@orders = Order.where(customer_id: current_customer.id).order(created_at: :desc).page(params[:page]).per(10)
+      #@order_details = OrderDetail.where(order_id: params[:id])
     end
 
     
