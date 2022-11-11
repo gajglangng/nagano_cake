@@ -18,7 +18,7 @@ class Admin::OrdersController < ApplicationController
   def show #注文履歴詳細
     @order = Order.find(params[:id])
     @order_details = OrderDetail.where(order_id: params[:id])
-    @total_payment = (@order.billing_amount - @order.postage).to_s(:delimited)
+    #@total_price = (@order.total_payment - @order.postage).to_s(:delimited)
   end
    
   def update #注文ステータス
@@ -28,15 +28,15 @@ class Admin::OrdersController < ApplicationController
          @order.order_items.update(production_status: "製作待ち")
       end
       redirect_to admin_order_path(params[:id])
-    end
+  end
 
-    def new
-      @order = Order.new
-    end
+  def new
+    @order = Order.new
+  end
 
-    private
+   private
 
     def order_params
-        params.require(:order).permit(:status)
+        params.require(:order).permit(:order_status)
     end
 end
