@@ -78,8 +78,7 @@ class Public::OrdersController < ApplicationController
 
     # 注文履歴
     def index
-        @orders = current_customer.orders.all
-        
+      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
     end
 
     

@@ -22,19 +22,20 @@
       	<tbody>
       	  <% @orders.each do |order| %>
       		<tr>
-      			<td><%= order.created_at.to_s(:datetime_jp) %></td>
-      			<td><%= order.postal_code %><br>
-      			    <%= order.address %><br>
-      			    <%= order.name %></td>
-      			<td>
-      			  <% @orders.each do |order_detail| %>
-      			    
-      			  <% end %>
-      			</td>
-      			<td><%= number_with_delimiter(order.total_payment) %>円</td>
-      			<td><%= order.status %></td>
-      			<td><%= link_to '表示する', order_path(order), class: "btn btn-info" %></td>
-      		</tr>
+              <td class="align-middle"><%= order.created_at.to_s(:datetime_jp) %></td>
+              <td class="align-middle"><%= order.postal_code %><br>
+                                       <%= order.address %><br>
+      			                           <%= order.name %></td>
+              
+              <td class="align-middle" style="word-break:break-all">
+                <% @orders.each do |order_detail| %>
+                  <%= link_to order_detail.item.name, item_path(order_detail.item) %><br>
+                <% end %>
+              </td>
+              <td><%= number_with_delimiter(order.total_payment) %>円</td>
+      		  	<td><%= order.status %></td>
+      			  <td><%= link_to '表示する', order_path(order), class: "btn btn-info" %></td>
+            </tr>
       	  <% end %>
       	</tbody>
       </table>
