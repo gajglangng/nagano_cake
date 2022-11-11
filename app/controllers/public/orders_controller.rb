@@ -9,13 +9,13 @@ class Public::OrdersController < ApplicationController
     end
 
     def confirm
-         @order = Order.new
-         @cart_items = CartItem.where(customer_id: current_customer.id)
-         @order_postage = 800
-         @total_price = 0
-         @cart_items.each do |cart_item|
-          tax_price = ((cart_item.item.price * 1.1).round(2)).ceil * (cart_item.amount)
-          @total_price += tax_price
+        @order = Order.new
+        @cart_items = CartItem.where(customer_id: current_customer.id)
+        @order_postage = 800
+        @total_price = 0
+        @cart_items.each do |cart_item|
+         tax_price = ((cart_item.item.price * 1.1).round(2)).ceil * (cart_item.amount)
+         @total_price += tax_price
         end
          
          @total_payment = @order_postage + @total_price
@@ -41,9 +41,8 @@ class Public::OrdersController < ApplicationController
         else
             render 'new'
         end
-        
     end
-
+    
     def create #注文情報登録
         @order = Order.new(order_params)
         @order.customer_id = current_customer.id
@@ -65,8 +64,12 @@ class Public::OrdersController < ApplicationController
           @order_detail.save #注文商品を保存
         end #ループ終わり
             
-            current_customer.cart_items.destroy_all
-            redirect_to orders_complete_path
+          current_customer.cart_items.destroy_all
+          redirect_to orders_complete_path
+    end
+    
+    def order_complete #注文完了
+
     end
 
     def show #注文履歴詳細
@@ -79,9 +82,6 @@ class Public::OrdersController < ApplicationController
         
     end
 
-    def complete #注文完了
-
-    end
     
     #def after_orders_comfirm_path_for(resource)
      # orders_complete_path(resource)
@@ -96,5 +96,4 @@ class Public::OrdersController < ApplicationController
      def delivery_address_type_params
         params.permit(:delivery_address_type)
      end
-     
-end
+end 

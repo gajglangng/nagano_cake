@@ -65,7 +65,7 @@
       		</tr>
       	</thead>
       	<tbody>
-      	  <% @order_details.each do |order_detail| %>
+      	  <% @order.order_details.each do |order_detail| %>
       		<tr>
       			<td><%= order_detail.detail.name %></td>
       			<td><%= order_detail.price.to_s(:delimited) %>円</td>

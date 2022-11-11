@@ -42,7 +42,7 @@
         <%= @order.address %></br>　　　　　　 
         <%= @order.name %> 様</p>
         
-      <%= form_with model: @order,  do |f| %>
+      <%= form_with model: @order, local:true do |f| %>
        
         <%= f.hidden_field :postage %>
         <%= f.hidden_field :total_payment %>
@@ -74,6 +74,5 @@
         </tr>
       </table>
     </div>
-
   </div>
 </div>
