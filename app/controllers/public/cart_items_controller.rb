@@ -5,6 +5,11 @@ class Public::CartItemsController < ApplicationController
   def cart
     @customer = current_customer
     @cart_items = CartItem.where(customer_id: current_customer.id)
+    @total_price = 0
+    @cart_items.each do |cart_item|
+      tax_price = ((cart_item.item.price * 1.1).round(2)).ceil * (cart_item.amount)
+      @total_price += tax_price
+    end
     #@cart_item = CartItem.all
   end
 

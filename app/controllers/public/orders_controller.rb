@@ -6,6 +6,7 @@ class Public::OrdersController < ApplicationController
         @customer = current_customer
         @order = Order.new
         @addresses = current_customer.addresses.all
+        
     end
 
     def confirm
@@ -52,6 +53,7 @@ class Public::OrdersController < ApplicationController
         @order.payment_method = params[:order][:payment_method]
         @order.total_payment = params[:order][:total_payment]
         @order.postage = 800
+        #@order.total_payment = billing(@order)
         @order.save
         
         # ordered_itmemの保存
@@ -81,8 +83,16 @@ class Public::OrdersController < ApplicationController
     def index
       @customer = current_customer
       @orders = current_customer.orders.all
-      #@orders = Order.where(customer_id: current_customer.id).order(created_at: :desc).page(params[:page]).per(10)
-      #@order_details = OrderDetail.where(order_id: params[:id])
+     
+      @cart_items = CartItem.where(customer_id: current_customer.id)
+      @order_postage = 800
+      @total_price = 0
+      @cart_items.each do |cart_item|
+        tax_price = ((cart_item.item.price * 1.1).round(2)).ceil * (cart_item.amount)
+        @total_price += tax_price
+      end
+         
+      @total_payment = @order_postage + @total_price
     end
 
     

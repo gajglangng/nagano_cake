@@ -32,7 +32,7 @@
       <table class="table table-bordered">
         <tr>
           <th class="success col-xs-5">商品合計</th>
-          <% (@order.total_payment - @order.postage).to_s(:delimited) %>
+          <%=@total_price.to_s(:delimited) %>
         </tr>
         <tr>
           <th class="success">配送料</th>
