@@ -53,7 +53,6 @@ class Public::OrdersController < ApplicationController
         @order.payment_method = params[:order][:payment_method]
         @order.total_payment = params[:order][:total_payment]
         @order.postage = 800
-        #@order.total_payment = billing(@order)
         @order.save
         
         # ordered_itmemの保存
@@ -78,17 +77,14 @@ class Public::OrdersController < ApplicationController
     # 注文履歴
     def index
       @customer = current_customer
-      #@order = Order.find(params[:id])
-      @order_details= current_customer.order_details.all
-      #@order_details = OrderDetail.where(order_id: params[:id])
-      @order.postage = 800
-      #@cart_items = CartItem.where(customer_id: current_customer.id)
+      @orders = Order.all
       @total_price = 0
-      @order_details.each do |order_detail|
-         @total_price += order_detail.item.with_tax_price * order_detail.amount
-        end
-      @order.total_payment = @order.postage + @total_price
+      @total_price = order_detail.item.with_tax_price * order_detail.amount
+      @total_payment = 800 + @total_price
       
+      
+      @orders = Order.page(params[:page]).per(10)
+      @pages = Order.page(params[:page])
     end
 
     def show #注文履歴詳細
@@ -99,10 +95,12 @@ class Public::OrdersController < ApplicationController
       #@cart_items = CartItem.where(customer_id: current_customer.id)
       @total_price = 0
       @order_details.each do |order_detail|
-         @total_price += order_detail.item.with_tax_price * order_detail.amount
-        end
+        @total_price += order_detail.item.with_tax_price * order_detail.amount
+      end
       @order.total_payment = @order.postage + @total_price
     end
+    
+    
     
     private
      def order_params

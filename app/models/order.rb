@@ -1,13 +1,12 @@
 class Order < ApplicationRecord
   
   
-  validates :total_payment, presence: true
-  validates :payment_method, presence: true
-  validates :postage, presence: true
-  #validates :ship.address, length: { in: 1..48 }
-  #validates :ship.postal_code, format: { with: VALID_POSTCODE_REGEX }
-  #validates :ship.name, length: { in: 1..32 }
   validates :order_status, presence: true
+  validates :customer_id, :address, :name, :postage,
+			  		:total_payment, :payment_method,
+			  		presence: true
+	#validates :postal_code, length: {is: 7}, numericality: { only_integer: true }
+	#validates :postage, :total_payment, numericality: { only_integer: true }		  		
   
   belongs_to :customer
   has_many :cart_items
