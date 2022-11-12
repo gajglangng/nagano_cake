@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     get '/cart_items' => 'cart_items#cart'
 
     post '/orders/confirm' => 'orders#confirm'
+    get 'orders/:id', to: 'orders#show'
     get '/orders/complete' => 'orders#order_complete'
     resources :orders, only: [:new, :create, :show, :index]
    

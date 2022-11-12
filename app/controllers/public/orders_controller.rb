@@ -57,14 +57,15 @@ class Public::OrdersController < ApplicationController
         @order.save
         
         # ordered_itmemの保存
-        current_customer.cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
-          @order_detail = OrderDetail.new #初期化宣言
-          @order_detail.item_id = cart_item.item_id #商品idを注文商品idに代入
-          @order_detail.amount = cart_item.amount #商品の個数を注文商品の個数に代入
-          @order_detail.price = (cart_item.item.price*1.1).floor #消費税込みに計算して代入
-          @order_detail.order_id =  @order.id #注文商品に注文idを紐付け
-          @order_detail.save #注文商品を保存
-        end #ループ終わり
+         current_customer.cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
+           @order_detail = OrderDetail.new #初期化宣言
+           @order_detail.order_id =  @order.id #注文商品に注文idを紐付け
+           @order_detail.item_id = cart_item.item_id #商品idを注文商品idに代入
+           @order_detail.amount = cart_item.amount #商品の個数を注文商品の個数に代入
+           @order_detail.price = (cart_item.item.price * 1.1).round(2).ceil
+          #(cart_item.item.price*1.1).floor #消費税込みに計算して代入
+           @order_detail.save #注文商品を保存
+         end #ループ終わり
             
           current_customer.cart_items.destroy_all
           redirect_to orders_complete_path
@@ -73,34 +74,36 @@ class Public::OrdersController < ApplicationController
     def order_complete #注文完了
 
     end
-
-    def show #注文履歴詳細
-      @order = Order.find(params[:id])
-      @order_details = OrderDetail.where(order_id: params[:id])
-    end
-
+    
     # 注文履歴
     def index
       @customer = current_customer
-      @orders = current_customer.orders.all
-     
-      @cart_items = CartItem.where(customer_id: current_customer.id)
-      @order_postage = 800
+      #@order = Order.find(params[:id])
+      @order_details= current_customer.order_details.all
+      #@order_details = OrderDetail.where(order_id: params[:id])
+      @order.postage = 800
+      #@cart_items = CartItem.where(customer_id: current_customer.id)
       @total_price = 0
-      @cart_items.each do |cart_item|
-        tax_price = ((cart_item.item.price * 1.1).round(2)).ceil * (cart_item.amount)
-        @total_price += tax_price
-      end
-         
-      @total_payment = @order_postage + @total_price
+      @order_details.each do |order_detail|
+         @total_price += order_detail.item.with_tax_price * order_detail.amount
+        end
+      @order.total_payment = @order.postage + @total_price
+      
     end
 
+    def show #注文履歴詳細
+      @order = Order.find(params[:id])
+      @order_details= @order.order_details
+      #@order_details = OrderDetail.where(order_id: params[:id])
+      @order.postage = 800
+      #@cart_items = CartItem.where(customer_id: current_customer.id)
+      @total_price = 0
+      @order_details.each do |order_detail|
+         @total_price += order_detail.item.with_tax_price * order_detail.amount
+        end
+      @order.total_payment = @order.postage + @total_price
+    end
     
-    #def after_orders_comfirm_path_for(resource)
-     # orders_complete_path(resource)
-    #end
-
-
     private
      def order_params
         params.require(:order).permit(:payment_method, :postage, :postal_code, :address, :name, :customer_id, :total_payment, :order_status, :item_id)

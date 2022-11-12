@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   
+  
   validates :total_payment, presence: true
   validates :payment_method, presence: true
   validates :postage, presence: true
