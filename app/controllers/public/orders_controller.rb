@@ -1,6 +1,7 @@
 class Public::OrdersController < ApplicationController
 
-  before_action :authenticate_customer!
+  include ApplicationHelper    
+ before_action :authenticate_customer!
 
     def new #注文情報入力画面
         @customer = current_customer
@@ -10,7 +11,9 @@ class Public::OrdersController < ApplicationController
     end
 
     def confirm
-        @order = Order.new
+        @order = Order.new(
+         customer: current_customer,
+         payment_method: params[:order][:payment_method])
         @cart_items = CartItem.where(customer_id: current_customer.id)
         @order_postage = 800
         @total_price = 0
@@ -44,7 +47,7 @@ class Public::OrdersController < ApplicationController
     end
     
     def create #注文情報登録
-        @order = Order.new(order_params)
+        @order = current_customer.orders.new(order_params)
         @order.customer_id = current_customer.id
         @order.name = params[:order][:name]
         @order.postal_code = params[:order][:postal_code]
@@ -55,18 +58,19 @@ class Public::OrdersController < ApplicationController
         @order.save
         
         # ordered_itmemの保存
-         current_customer.cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
+        @cart_items = current_customer.cart_items
+         @cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
            @order_detail = OrderDetail.new #初期化宣言
            @order_detail.order_id =  @order.id #注文商品に注文idを紐付け
            @order_detail.item_id = cart_item.item_id #商品idを注文商品idに代入
            @order_detail.amount = cart_item.amount #商品の個数を注文商品の個数に代入
-           @order_detail.price = (cart_item.item.price * 1.1).round(2).ceil
-          #(cart_item.item.price*1.1).floor #消費税込みに計算して代入
+           @order_detail.price = cart_item.item.price * cart_item.amount
+          #(cart_item.item.price * 1.1).round(2).ceil #消費税込みに計算して代入
            @order_detail.save #注文商品を保存
          end #ループ終わり
             
-          current_customer.cart_items.destroy_all
-          redirect_to orders_complete_path
+        current_customer.cart_items.destroy_all
+        redirect_to orders_complete_path
     end
     
     def order_complete #注文完了
@@ -76,12 +80,6 @@ class Public::OrdersController < ApplicationController
     def index #注文履歴一覧
       #@customer = current_customer
       @orders = current_customer.orders
-      @cart_items = CartItem.where(customer_id: current_customer.id)
-        #@order_postage = 800
-      @total_price = 0
-      @cart_items.each do |cart_item|
-       @total_price += subtotal(cart_item)
-      end
       
       @orders = Order.page(params[:page]).per(10)
       @pages = Order.page(params[:page])

@@ -9,11 +9,14 @@
       <%= form_with model: @order, url: orders_confirm_path, local: true do |f| %>
       
       <p style="font-weight: bold;font-size: 20px;">支払方法</p>
-      　<%= f.radio_button :payment_method, "クレジットカード", checked: true %>
-        <%= f.label :クレジットカード, class: "payment_method_label" %></br>
-      　<%= f.radio_button :payment_method, "銀行振込" %>
-        <%= f.label :銀行振込, class: "payment_method_label" %>
-    <br></br>
+      <div class="col-xs-10">
+             <%= f.radio_button :payment_method, :"クレジットカード", checked: true %>
+             <%= f.label :"クレジットカード"%>
+           </div>
+           <div class="col-xs-10">
+             <%= f.radio_button :payment_method, :"銀行振込" %>
+             <%= f.label :"銀行振込"%>
+           </div>
     
       <p style="font-weight: bold;font-size: 20px;">お届け先</p>
       <div class="form-group">

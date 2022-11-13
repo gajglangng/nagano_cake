@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   scope module: :public do
     
     get '/customers/my_page' => 'customers#show'
-    get 'edit/customers' => 'customers#edit'
+    get '/edit/customers' => 'customers#edit'
     patch 'update/customers' => 'customers#update'
     resources :customers, only: [:edit, :update, :show] do
       collection do
