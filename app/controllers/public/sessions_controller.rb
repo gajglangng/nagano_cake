@@ -1,17 +1,29 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-  #before_action :customer_state, only: [:create]
+  before_action :customer_state, only: [:create]
   
-  protected
+  
+  
+ protected
   
   def customer_state
-    @customer = Customer.find_by(email: sign_in_params[:email])
-      if @customer.is_deleted == false
-        redirect_to new_customer_session_path, danger: "退会済みのユーザーです。"
+    @customer = Customer.find_by(email: params[:customer][:email])
+    if @customer
+      if @customer.is_deleted
+        flash[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+        redirect_to new_customer_session_path
       end
-
+    end
   end
+  
+  #def customer_state
+  #  @customer = Customer.find_by(email: sign_in_params[:email])
+  #    if @customer.is_deleted == false
+  #      redirect_to new_customer_session_path, danger: "退会済みのユーザーです。"
+  #    end
+
+  
 
   # GET /resource/sign_in
   # def new

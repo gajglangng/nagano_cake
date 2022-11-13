@@ -1,8 +1,10 @@
 class Customer < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  
-  
+  # is_deletedがfalseならtrueを返すようにしている
+  #def active_for_authentication?
+   # super && (is_deleted == false)
+  #end
   
   validates :last_name, presence: true
   validates :first_name, presence: true
@@ -39,12 +41,6 @@ class Customer < ApplicationRecord
   has_many :cart_items
   has_many :orders
   
-
-  
-  # is_deletedがfalseならtrueを返すようにしている
-  def active_for_authentication?
-    super && (is_deleted == false)
-  end
 
   
   def prepare_cart

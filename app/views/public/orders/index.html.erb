@@ -7,7 +7,8 @@
     <div class="col-sm-12">
    <!--注文履歴テーブル-->
       <table class="table table-bordered">
-      	<thead>      		<tr class="success">
+      	<thead>      		
+      	  <tr class="success">
       			<th>注文日</th>
       			<th>配送先</th>
       			<th>注文商品</th>
@@ -26,9 +27,8 @@
       			<td>
       			  <% order.order_details.each do |order_detail| %>
       			    <%= order_detail.item.name %></br>
-      			  <% end %>
-      			</td>
-      			  
+              <% end %>
+            </td>  
       		  <td><%= order.total_payment %>円</td>
       			  
       			

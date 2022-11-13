@@ -88,9 +88,7 @@ class Public::OrdersController < ApplicationController
     def show #注文履歴詳細
       @order = Order.find(params[:id])
       @order_details= @order.order_details
-      #@order_details = OrderDetail.where(order_id: params[:id])
       @order.postage = 800
-      #@cart_items = CartItem.where(customer_id: current_customer.id)
       @total_price = 0
       @order_details.each do |order_detail|
         @total_price += order_detail.item.with_tax_price * order_detail.amount
