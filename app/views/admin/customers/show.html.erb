@@ -1,10 +1,11 @@
-<h3 class="show-title-admin"><%= @customer.last_name %> <%= @customer.first_name  %>さんの会員詳細</h3>
+<h3 class="col-lg-8">
+  <%= @customer.last_name %> <%= @customer.first_name  %>さんの会員詳細</h3>
 <div class="container">
-  <div class="row">
+  <div class="row m-5">
 
-    <div class="col-lg-8">
+    <div class="col-10 offset-1">
 
-      <table class="customer-table ">
+      <table class="table ">
         <tr>
           <td>会員ID</td>
           <td><%= @customer.id %></td>
@@ -35,13 +36,14 @@
           <td>メールアドレス</td>
           <td><%= @customer.email %></td>
         </tr>
-        <td>
+          <td>会員ステータス</td>
+          <td>
           <% if @customer.is_deleted == true %>
             <span class="label label-danger">退会</span>
           <% else %>
             <span class="label label-info">有効</span>
           <% end %>
-        </td>
+          </td>
         
       </table>
       <div class="col-md-5">
@@ -52,7 +54,7 @@
       <br></br>
       <div class="col-md-5">
         <div id = "orders-action-btn">
-          <%= link_to "　注文履歴一覧を見る　", admin_orders_path(order_sort: 1,customer_id: @customer), class: "btn btn-default btn-primary " %>
+          <%= link_to "　注文履歴一覧を見る　", admin_orders_path, class: "btn btn-default btn-primary " %>
         </div>
       </div>
   </div>
