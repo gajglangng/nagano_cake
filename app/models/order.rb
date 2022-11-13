@@ -1,12 +1,20 @@
 class Order < ApplicationRecord
   
+  #def with_tax_price
+  #  (price * 1.1).floor
+  #end
   
   validates :order_status, presence: true
   validates :customer_id, :address, :name, :postage,
 			  		:total_payment, :payment_method,
 			  		presence: true
 	#validates :postal_code, length: {is: 7}, numericality: { only_integer: true }
-	#validates :postage, :total_payment, numericality: { only_integer: true }		  		
+	validates :postage, :total_payment, numericality: { only_integer: true }		  		
+	
+	#validates :price, presence: true,
+   #                 numericality: { only_integer: true,
+    #                                greater_than_or_equal_to: 0
+     #                             }
   
   belongs_to :customer
   has_many :cart_items

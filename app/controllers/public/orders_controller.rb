@@ -18,7 +18,6 @@ class Public::OrdersController < ApplicationController
          tax_price = ((cart_item.item.price * 1.1).round(2)).ceil * (cart_item.amount)
          @total_price += tax_price
         end
-         
         @total_payment = @order_postage + @total_price
         
         case params[:delivery_address_type]
@@ -74,14 +73,15 @@ class Public::OrdersController < ApplicationController
 
     end
     
-    # 注文履歴
-    def index
-      @customer = current_customer
-      @orders = Order.all
+    def index #注文履歴一覧
+      #@customer = current_customer
+      @orders = current_customer.orders
+      @cart_items = CartItem.where(customer_id: current_customer.id)
+        #@order_postage = 800
       @total_price = 0
-      @total_price = order_detail.item.with_tax_price * order_detail.amount
-      @total_payment = 800 + @total_price
-      
+      @cart_items.each do |cart_item|
+       @total_price += subtotal(cart_item)
+      end
       
       @orders = Order.page(params[:page]).per(10)
       @pages = Order.page(params[:page])

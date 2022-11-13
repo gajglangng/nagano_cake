@@ -33,10 +33,18 @@ Rails.application.routes.draw do
   
   scope module: :public do
     
-    resources :customers, only: [:edit, :update, :show]
-    get '/customers/unsubscribe' => 'customers#unsubscribe'
-    patch '/customers/withdraw' => 'customers#withdraw' 
     get '/customers/my_page' => 'customers#show'
+    get 'edit/customers' => 'customers#edit'
+    patch 'update/customers' => 'customers#update'
+    resources :customers, only: [:edit, :update, :show] do
+      collection do
+  	     get 'unsubscribe'
+  	     patch 'withdraw'
+  	  end
+  	end  
+    #get '/customers/unsubscribe' => 'customers#unsubscribe'
+    #patch '/customers/withdraw' => 'customers#withdraw' 
+    
     
     
     resources :items, only: [:index, :show]
@@ -45,7 +53,7 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:create, :destroy, :update]
     #delete '/cart_items/:id' => 'cart_items#destroy'
     get '/cart_items' => 'cart_items#cart'
-
+  
     post '/orders/confirm' => 'orders#confirm'
     #get 'orders/:id', to: 'orders#show'
     get '/orders/complete' => 'orders#order_complete'

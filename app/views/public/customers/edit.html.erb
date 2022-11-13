@@ -16,7 +16,7 @@
     </div>
     
     <div class="col-md-10 col-md-offset-2">
-      <%= form_with model: @customer, url: customer_path, method: :patch, local: true do |f| %>
+      <%= form_with model: @customer, url: update_customers_path, method: :patch, local: true do |f| %>
         
         <form class="form-horizontal">
           <div class="form-group">
@@ -71,7 +71,7 @@
           <div class="form-group">
             <div class="col-md-offset-1 col-md-6 customer-info-button">
               <%= f.submit "編集内容を保存", class:"btn btn-info btn-lg" %>
-              <%= link_to '退会する', customers_unsubscribe_path, class:"btn btn-danger pull-right btn-lg" %>
+              <%= link_to "退会する", unsubscribe_customers_path, class:"btn btn-danger pull-right btn-lg" %>
             </div>
           </div>
         </form>
