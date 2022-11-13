@@ -1,7 +1,7 @@
 class Admin::OrderDetailsController < ApplicationController
   layout 'admin'
   
-  def update
+    def update
         # 制作ステータス
         @order_detail = OrderDetail.find(params[:id])
         @order_detail.making_status = params[:order_detail][:making_status]

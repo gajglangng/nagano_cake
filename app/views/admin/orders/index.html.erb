@@ -13,15 +13,16 @@
           </tr>
         </thead>
         <tbody>
-         
+          
           <% @orders.each do |order| %>
             <tr>
-              <td><%= link_to order.created_at.strftime("%Y/%m/%d　%H:%M"), admin_order_path(order.id) %></td>
+              <td><%= link_to order.created_at.strftime("%Y/%m/%d　%H:%M"), admin_order_path(order.id)  %></td>
               <td><%= order.customer.last_name %> <%= order.customer.first_name %> 様</td>
-              <% amount = 0 %>
+              <% count = 0 %>
               <% order.order_details.each do |order_detail| %>
-                <td><% count += order_detail.amount %></td>
+               <% count += order_detail.amount %>
               <% end %>
+              <td><%= count %></td>
             </tr>
           <% end %>
         </tbody>

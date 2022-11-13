@@ -3,22 +3,21 @@ class Admin::OrdersController < ApplicationController
   layout 'admin'
   
   def index #注文履歴一覧
-    case params[:order_sort]
-    when "0"
-     @orders = Order.where(created_at: Date.today.in_time_zone.all_day).page(params[:page]).per(10)
-    when "1"
-     @customer = Customer.find(params[:customer_id])
-     @orders = @customer.orders.page(params[:page]).per(10)
-    else
-     @orders = Order.all.page(params[:page]).per(10)
-    end
+    @orders = Order.page(params[:page]).per(10)
+    #@order_details = @order.order_details
   end
 
   
   def show #注文履歴詳細
     @order = Order.find(params[:id])
     @order_details = OrderDetail.where(order_id: params[:id])
-    #@total_price = (@order.total_payment - @order.postage).to_s(:delimited)
+    @order.postage = 800
+    #@cart_items = CartItem.where(customer_id: current_customer.id)
+    @total_price = 0
+    @order_details.each do |order_detail|
+      @total_price += order_detail.item.with_tax_price * order_detail.amount
+    end
+    @order.total_payment = @order.postage + @total_price
   end
    
   def update #注文ステータス
@@ -37,6 +36,6 @@ class Admin::OrdersController < ApplicationController
    private
 
     def order_params
-        params.require(:order).permit(:order_status)
+        params.require(:order).permit(:postage, :total_payment, :name, :payment_method, :address, :postal_code, :making_status, :order_status)
     end
 end
