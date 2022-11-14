@@ -58,7 +58,7 @@ class Public::OrdersController < ApplicationController
         @order.save
         
         # ordered_itmemの保存
-        @cart_items = current_customer.cart_items
+        @cart_items = CartItem.where(customer_id: current_customer.id)
          @cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
            @order_detail = OrderDetail.new #初期化宣言
            @order_detail.order_id = @order.id #注文商品に注文idを紐付け
@@ -69,19 +69,22 @@ class Public::OrdersController < ApplicationController
            @order_detail.save #注文商品を保存
          end #ループ終わり
             
-        current_customer.cart_items.destroy_all
+        @cart_items.destroy_all
         redirect_to orders_complete_path
     end
+ 
     
     def order_complete #注文完了
 
     end
     
     def index #注文履歴一覧
+      @customer = Customer.find(current_customer.id)
       @orders = Order.page(params[:page]).per(10)
     end
 
     def show #注文履歴詳細
+     
      @order = Order.find(params[:id])
      @order_details = OrderDetail.where(order_id: params[:id])
      @order.postage = 800
