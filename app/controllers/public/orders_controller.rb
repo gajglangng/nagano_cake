@@ -87,7 +87,7 @@ class Public::OrdersController < ApplicationController
      @order.postage = 800
      @total_price = 0
      @order_details.each do |order_detail|
-       @total_price += order_detail.item.with_tax_price * order_detail.amount
+      @total_price += order_detail.item.with_tax_price * order_detail.amount
      end
      @order.total_payment = @order.postage + @total_price
     end
