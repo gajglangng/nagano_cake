@@ -17,7 +17,7 @@ class Order < ApplicationRecord
      #                             }
   
   belongs_to :customer
-  has_many :cart_items
+  has_many :cart_items, through: :order_details
   has_many :order_details, dependent: :destroy
   #has_many :items, through: :ordered_items  #注文には商品が多くある
 
