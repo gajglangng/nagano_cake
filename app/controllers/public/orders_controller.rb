@@ -1,6 +1,6 @@
 class Public::OrdersController < ApplicationController
 
-  include ApplicationHelper    
+ include ApplicationHelper    
  before_action :authenticate_customer!
 
     def new #注文情報入力画面
@@ -61,7 +61,7 @@ class Public::OrdersController < ApplicationController
         @cart_items = current_customer.cart_items
          @cart_items.each do |cart_item| #カートの商品を1つずつ取り出しループ
            @order_detail = OrderDetail.new #初期化宣言
-           @order_detail.order_id =  @order.id #注文商品に注文idを紐付け
+           @order_detail.order_id = @order.id #注文商品に注文idを紐付け
            @order_detail.item_id = cart_item.item_id #商品idを注文商品idに代入
            @order_detail.amount = cart_item.amount #商品の個数を注文商品の個数に代入
            @order_detail.price = cart_item.item.price * cart_item.amount
@@ -78,31 +78,19 @@ class Public::OrdersController < ApplicationController
     end
     
     def index #注文履歴一覧
-      #@customer = current_customer
-      #@orders = current_customer.orders
-      #@order_details = OrderDetail.where(order_id: params[:id])
-      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
-      #@order.postage = 800
-      #@order_details= @order.order_details
-      @total_price = 
-      
-      @total_payment = 800 + @total_price
-      
       @orders = Order.page(params[:page]).per(10)
-      @pages = Order.page(params[:page])
     end
 
     def show #注文履歴詳細
-      @order = Order.find(params[:id])
-      @order_details= @order.order_details
-      @order.postage = 800
-      @total_price = 0
-      @order_details.each do |order_detail|
-        @total_price += order_detail.item.with_tax_price * order_detail.amount
-      end
-      @order.total_payment = @order.postage + @total_price
+     @order = Order.find(params[:id])
+     @order_details = OrderDetail.where(order_id: params[:id])
+     @order.postage = 800
+     @total_price = 0
+     @order_details.each do |order_detail|
+       @total_price += order_detail.item.with_tax_price * order_detail.amount
+     end
+     @order.total_payment = @order.postage + @total_price
     end
-    
     
     
     private
