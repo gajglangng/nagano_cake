@@ -79,7 +79,14 @@ class Public::OrdersController < ApplicationController
     
     def index #注文履歴一覧
       #@customer = current_customer
-      @orders = current_customer.orders
+      #@orders = current_customer.orders
+      #@order_details = OrderDetail.where(order_id: params[:id])
+      @orders = Order.where(customer_id: current_customer.id).order(created_at: :desc)
+      #@order.postage = 800
+      #@order_details= @order.order_details
+      @total_price = 
+      
+      @total_payment = 800 + @total_price
       
       @orders = Order.page(params[:page]).per(10)
       @pages = Order.page(params[:page])
