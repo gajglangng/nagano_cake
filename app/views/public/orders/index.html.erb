@@ -6,6 +6,7 @@
   <div class="row-sm-12 order-history-index">
     <div class="col-sm-12">
    <!--注文履歴テーブル-->
+    
       <table class="table table-bordered">
       	<thead>      		
       	  <tr class="success">
@@ -18,6 +19,7 @@
       	</thead>
 
       	<tbody>
+    
       	  <% @orders.each do |order| %>
       		 <tr>
       			<td><%= order.created_at.strftime("%Y/%m/%d") %></td>
@@ -40,7 +42,7 @@
       			<td><%= link_to '表示する', order_path(order), class: "btn btn-info" %></td>
       		 </tr>
       	  <% end %>
-      	  
+    
       	</tbody>
       </table>
       

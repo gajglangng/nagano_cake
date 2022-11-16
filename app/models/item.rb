@@ -24,7 +24,9 @@ class Item < ApplicationRecord
 
   validates :is_active, inclusion: {in: [true, false]}
   has_many :cart_items, dependent: :destroy
-  has_many :order_details
+  has_many :order_details, dependent: :destroy
+  has_many :orders, through: :order_details
+  
   has_one_attached :image
   
 
