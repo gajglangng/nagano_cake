@@ -35,7 +35,7 @@
       		    <% total_payment = 0 %>
       		    <% postage = 800 %>
               <% order.order_details.each do |order_detail| %>
-               <% total_payment += order_detail.price * order_detail.amount %>
+               <% total_payment += order_detail.item.with_tax_price * order_detail.amount %>
               <% end %>
             <td><%= (total_payment + postage).to_s(:delimited) %>円</td>   
               
